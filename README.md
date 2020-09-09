@@ -1,6 +1,6 @@
 # bustop
 
-A new Flutter project.
+Un proyecto creado en Flutter
 
 ## Getting Started
 
