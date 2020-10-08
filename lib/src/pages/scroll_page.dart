@@ -9,6 +9,7 @@ class ScrollPage extends StatelessWidget {
         children: <Widget>[
           _pagina1(),
           //Hacer validacion si esta logeado ir a homepage si no ir a login
+         _login_page(),
           HomePage(),
           
         ],
@@ -47,16 +48,13 @@ class ScrollPage extends StatelessWidget {
           child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-          SizedBox(height: 20.0,),
-          Text('BUSTOP', style: TextStyle(color: Colors.white, fontSize: 50.0),),
-          Text('¡Bienvenidos!', style: TextStyle(color: Colors.white, fontSize: 20.0),),
           Expanded( child: Container(), ),
           Icon(Icons.keyboard_arrow_down, size: 90.0, color: Colors.white,)
         ],
       ),
     );
   }
-    Widget _pagina2(){
+    Widget _login_page(){
     return Container(
       width : double.infinity,
       height: double.infinity,
