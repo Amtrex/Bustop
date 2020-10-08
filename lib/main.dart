@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
       title: 'Bustop',
       initialRoute: '/',
       routes: {
-        // '/'         : (BuildContext context)=>HomePage(),
-        '/'   : (BuildContext context)=>ScrollPage(),
+        '/'         : (BuildContext context)=>HomePage(),
+        '/scroll'   : (BuildContext context)=>ScrollPage(),
       },
     );
   }
