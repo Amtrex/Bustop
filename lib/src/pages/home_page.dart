@@ -29,13 +29,13 @@ Widget _fondoApp(){
   );
 
   final orangeBox = Transform.rotate(
-    angle: -pi / 4.0,
+    angle: -pi / 4.3,
     child: Container(
-  height: 330.0,
-  width: 330.0,
-  decoration: BoxDecoration(
-    color: Color.fromRGBO(251, 85, 23, 1),
-    borderRadius: BorderRadius.circular(60.0)
+      height: 360.0,
+      width: 360.0,
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(251, 85, 23, 1),
+        borderRadius: BorderRadius.circular(60.0)
       ),
     ),
   );
