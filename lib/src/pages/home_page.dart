@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:bustop/src/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -52,7 +53,6 @@ Widget _fondoApp(){
     ],
   );
 }
-
 
 
 }
