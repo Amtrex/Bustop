@@ -1,12 +1,13 @@
 import 'dart:math';
 
 import 'package:bustop/src/pages/home_page.dart';
+import 'package:bustop/src/pages/login_page.dart';
 import 'package:flutter/material.dart';
 class ScrollPage extends StatefulWidget {
   @override
   _ScrollPageState createState() => _ScrollPageState();
 }
-
+String nombre = "jose" ;
 class _ScrollPageState extends State<ScrollPage> {
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,7 @@ class _ScrollPageState extends State<ScrollPage> {
         children: <Widget>[
           _pagina1(),
           //Hacer validacion si esta logeado ir a homepage si no ir a login
-         _login_page(),
-          
+         LoginPage()
         ],
       ),
       
@@ -66,126 +66,5 @@ class _ScrollPageState extends State<ScrollPage> {
     );
   }
 
-    Widget _login_page(){
-    return Container(
-      width : double.infinity,
-      height: double.infinity,
-      color: Color.fromRGBO(255, 255, 255, 1),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:[
-
-            
-             SizedBox(
-              height: 300.0,
-            ), 
-
-            Container(              
-               width: 320.0,
-              child:
-              TextFormField(
-                    maxLength: 20,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.person),
-                      border: OutlineInputBorder(borderRadius:BorderRadius.circular(30)),
-                        hintText: ('Correo'),
-                      contentPadding: new EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-
-                    ),
-                    validator: (input) => !input.contains('@') ? 'Not a valid Email' : null,
-                  ),           
-            ),
-      
-            
-              SizedBox(
-              height: 20.0,
-            ), 
-
-            Container(
-              width: 320.0,
-              child: TextFormField(
-                      maxLength: 20,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.lock_open),
-                        border: OutlineInputBorder(borderRadius:BorderRadius.circular(30) ),
-                          hintText: ('Contraseña'),
-                          contentPadding: new EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                      ),
-                      validator: (input) => !input.contains('@') ? 'Not a valid Email' : null,
-                      obscureText: true,
-                    ),
-            ),       
-
-               Container(
-              child: GestureDetector(
-                child: Text("¿Tienes problemas con tu usuario o contraseña?"),
-
-                onTap:(){Navigator.pushNamed(context, '/');}
-
-              )
-
-            ),
-
-           Expanded( child: Container(), ), 
-
-
-            RaisedButton(
-              shape: StadiumBorder(),
-              color: Color(0xffdc4d1e),
-              child: Padding(
-                child:Text('INGRESAR', style: TextStyle( color: Colors.white),),
-                padding: EdgeInsets.symmetric(horizontal:90.0,vertical:15.0),
-              ),
-              onPressed: (){},
-            ),
-
-              SizedBox(
-              height: 10.0,
-            ),
-
-             Container(
-              child: GestureDetector(
-                child: Text("¿Aun no tienes cuenta? ¡Registrate!" , style: TextStyle(color: Color(0xffea5724), fontSize: 12.0, )),
-
-                onTap:(){Navigator.pushNamed(context, 'home');}
-
-              )
-
-            ),
-
-
-            SizedBox(
-              height: 30.0,
-            ),
-
-            
-          ],
-        ),
-      ),
-    );
-
-      final orangeBox2 = Transform.rotate(
-    angle: -pi / 4.3,
-    child: Container(
-      height: 360.0,
-      width: 360.0,
-      decoration: BoxDecoration(
-        color: Color.fromRGBO(251, 85, 23, 1),
-        borderRadius: BorderRadius.circular(60.0)
-      ),
-    ),
-  );
-  
-  
-
-  return Stack(
-    children: <Widget> [
-      Positioned(
-        top: -100.0,
-        child: orangeBox2
-        )
-    ],
-  );
-}
+    
 }
