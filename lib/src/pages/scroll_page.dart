@@ -121,7 +121,7 @@ class _ScrollPageState extends State<ScrollPage> {
               child: GestureDetector(
                 child: Text("¿Tienes problemas con tu usuario o contraseña?"),
 
-                onTap:(){Navigator.pushNamed(context, 'home');}
+                onTap:(){Navigator.pushNamed(context, '/');}
 
               )
 
@@ -138,6 +138,20 @@ class _ScrollPageState extends State<ScrollPage> {
                 padding: EdgeInsets.symmetric(horizontal:90.0,vertical:15.0),
               ),
               onPressed: (){},
+            ),
+
+              SizedBox(
+              height: 30.0,
+            ),
+
+             Container(
+              child: GestureDetector(
+                child: Text("¿Aun no tienes cuenta? ¡Registrate!" , style: TextStyle(color: Color(0xffea5724), fontSize: 12.0, )),
+
+                onTap:(){Navigator.pushNamed(context, 'home');}
+
+              )
+
             ),
 
 
