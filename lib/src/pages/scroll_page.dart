@@ -26,7 +26,7 @@ class ScrollPage extends StatelessWidget {
     return Container(
       width : double.infinity,
       height: double.infinity,
-      color: Color.fromRGBO(0, 32, 63, 1),
+      color: Color.fromRGBO(251, 85, 23, 1),
     );
   }
   Widget _imagenFondo() {
@@ -34,7 +34,7 @@ class ScrollPage extends StatelessWidget {
       width : double.infinity,
       height: double.infinity,
       child: Image(
-        image: AssetImage('assets/fondo.png'),
+        image: AssetImage('assets/fondo2.png'),
         fit: BoxFit.cover,
         ),
     );
@@ -63,17 +63,20 @@ class ScrollPage extends StatelessWidget {
     return Container(
       width : double.infinity,
       height: double.infinity,
-      color: Color.fromRGBO(0, 32, 63, 1),
+      color: Color.fromRGBO(251, 85, 23, 1),
       child: Center(
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             RaisedButton(
+              shape: StadiumBorder(),
               child: Text('Login'),
-              onPressed: (){},
+              onPressed: (){
+              },
             ),
             SizedBox(width: 20.0,),
             RaisedButton(
+              shape: StadiumBorder(),
               child: Text('Register'),
               onPressed: (){},
             ),
