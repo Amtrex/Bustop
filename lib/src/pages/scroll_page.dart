@@ -18,7 +18,6 @@ class _ScrollPageState extends State<ScrollPage> {
           _pagina1(),
           //Hacer validacion si esta logeado ir a homepage si no ir a login
          _login_page(),
-          HomePage(),
           
         ],
       ),
@@ -79,7 +78,7 @@ class _ScrollPageState extends State<ScrollPage> {
 
             
              SizedBox(
-              height: 150.0,
+              height: 330.0,
             ), 
 
             Container(              
@@ -90,7 +89,7 @@ class _ScrollPageState extends State<ScrollPage> {
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.person),
                       border: OutlineInputBorder(borderRadius:BorderRadius.circular(30)),
-                        hintText: ('Usuario:'),
+                        hintText: ('Correo'),
                       contentPadding: new EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
 
                     ),
@@ -100,7 +99,7 @@ class _ScrollPageState extends State<ScrollPage> {
       
             
               SizedBox(
-              height: 50.0,
+              height: 20.0,
             ), 
 
             Container(
@@ -110,7 +109,7 @@ class _ScrollPageState extends State<ScrollPage> {
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.lock_open),
                         border: OutlineInputBorder(borderRadius:BorderRadius.circular(30) ),
-                          hintText: ('Contraseña:'),
+                          hintText: ('Contraseña'),
                           contentPadding: new EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
                       ),
                       validator: (input) => !input.contains('@') ? 'Not a valid Email' : null,
@@ -128,11 +127,8 @@ class _ScrollPageState extends State<ScrollPage> {
 
             ),
 
-            SizedBox(
-              height: 220.0,
-            ), 
+           Expanded( child: Container(), ), 
 
-         
 
             RaisedButton(
               shape: StadiumBorder(),
@@ -146,7 +142,7 @@ class _ScrollPageState extends State<ScrollPage> {
 
 
             SizedBox(
-              height: 10.0,
+              height: 30.0,
             ),
 
             
