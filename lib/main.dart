@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/'   : (BuildContext context)=>ScrollPage(),
-        'home'         : (BuildContext context)=>HomePage(),
+        'home': (BuildContext context)=>HomePage(),
         
       },
     );
