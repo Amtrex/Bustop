@@ -78,7 +78,7 @@ class _ScrollPageState extends State<ScrollPage> {
 
             
              SizedBox(
-              height: 330.0,
+              height: 300.0,
             ), 
 
             Container(              
@@ -141,7 +141,7 @@ class _ScrollPageState extends State<ScrollPage> {
             ),
 
               SizedBox(
-              height: 30.0,
+              height: 10.0,
             ),
 
              Container(
