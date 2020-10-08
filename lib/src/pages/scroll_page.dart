@@ -1,3 +1,4 @@
+import 'package:bustop/src/pages/home_page.dart';
 import 'package:flutter/material.dart';
 class ScrollPage extends StatelessWidget {
   @override
@@ -7,7 +8,9 @@ class ScrollPage extends StatelessWidget {
         scrollDirection: Axis.vertical,
         children: <Widget>[
           _pagina1(),
-          _pagina2()
+          //Hacer validacion si esta logeado ir a homepage si no ir a login
+          HomePage(),
+          
         ],
       ),
       
@@ -57,7 +60,7 @@ class ScrollPage extends StatelessWidget {
     return Container(
       width : double.infinity,
       height: double.infinity,
-      color: Color.fromRGBO(251, 85, 23, 1),
+      color: Color.fromRGBO(255, 255, 255, 1),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -90,6 +93,11 @@ class ScrollPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+  Widget _scroll(){
+    return Scaffold(
+
     );
   }
 
