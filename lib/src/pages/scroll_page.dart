@@ -1,9 +1,17 @@
+import 'dart:math';
+
 import 'package:bustop/src/pages/home_page.dart';
 import 'package:flutter/material.dart';
-class ScrollPage extends StatelessWidget {
+class ScrollPage extends StatefulWidget {
+  @override
+  _ScrollPageState createState() => _ScrollPageState();
+}
+
+class _ScrollPageState extends State<ScrollPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: PageView(
         scrollDirection: Axis.vertical,
         children: <Widget>[
@@ -17,6 +25,7 @@ class ScrollPage extends StatelessWidget {
       
     );
   }
+
   Widget _pagina1(){
     return Stack(
       children: [
@@ -26,6 +35,7 @@ class ScrollPage extends StatelessWidget {
       ],
     );
   }
+
   Widget _colorFondo() {
     return Container(
       width : double.infinity,
@@ -33,6 +43,7 @@ class ScrollPage extends StatelessWidget {
       color: Color.fromRGBO(251, 85, 23, 1),
     );
   }
+
   Widget _imagenFondo() {
     return Container(
       width : double.infinity,
@@ -43,6 +54,7 @@ class ScrollPage extends StatelessWidget {
         ),
     );
   }
+
   Widget _textos(){
     return SafeArea(
           child: Column(
@@ -54,6 +66,7 @@ class ScrollPage extends StatelessWidget {
       ),
     );
   }
+
     Widget _login_page(){
     return Container(
       width : double.infinity,
@@ -63,55 +76,106 @@ class ScrollPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children:[
+
             
+             SizedBox(
+              height: 150.0,
+            ), 
+
+            Container(              
+               width: 320.0,
+              child:
+              TextFormField(
+                    maxLength: 20,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.person),
+                      border: OutlineInputBorder(borderRadius:BorderRadius.circular(30)),
+                        hintText: ('Usuario:'),
+                      contentPadding: new EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+
+                    ),
+                    validator: (input) => !input.contains('@') ? 'Not a valid Email' : null,
+                  ),           
+            ),
+      
+            
+              SizedBox(
+              height: 50.0,
+            ), 
+
+            Container(
+              width: 320.0,
+              child: TextFormField(
+                      maxLength: 20,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock_open),
+                        border: OutlineInputBorder(borderRadius:BorderRadius.circular(30) ),
+                          hintText: ('Contraseña:'),
+                          contentPadding: new EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                      ),
+                      validator: (input) => !input.contains('@') ? 'Not a valid Email' : null,
+                      obscureText: true,
+                    ),
+            ),       
+
+               Container(
+              child: GestureDetector(
+                child: Text("¿Tienes problemas con tu usuario o contraseña?"),
+
+                onTap:(){Navigator.pushNamed(context, 'home');}
+
+              )
+
+            ),
+
+            SizedBox(
+              height: 220.0,
+            ), 
+
+         
+
             RaisedButton(
               shape: StadiumBorder(),
-              color: Colors.white,
+              color: Color(0xffdc4d1e),
               child: Padding(
-                child:Text('INGRESAR',),
+                child:Text('INGRESAR', style: TextStyle( color: Colors.white),),
                 padding: EdgeInsets.symmetric(horizontal:90.0,vertical:15.0),
               ),
-              onPressed: (){
-                print('Click Ingresar');
-              },
+              onPressed: (){},
             ),
+
+
             SizedBox(
-              height: 40.0,
+              height: 10.0,
             ),
-            RaisedButton(
-              shape: StadiumBorder(),
-              color: Colors.white,
-              child: Padding(
-                child:Text('REGISTRARSE',),
-                padding: EdgeInsets.symmetric(horizontal:80.0,vertical:15.0),
-              ),
-              onPressed: (){ 
-                print('Click Registrarse');},
-            ),
+
+            
           ],
         ),
       ),
     );
-  }
-  Widget _scroll(){
-    return Scaffold(
 
-    );
-  }
-
-   Widget _textos2(){
-    return SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(height: 40.0,),
-          Text('Selecciona la accion que quieres realizar', style: TextStyle(color: Colors.white, fontSize: 30.0),),
-        ],
+      final orangeBox2 = Transform.rotate(
+    angle: -pi / 4.3,
+    child: Container(
+      height: 360.0,
+      width: 360.0,
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(251, 85, 23, 1),
+        borderRadius: BorderRadius.circular(60.0)
       ),
-    );
-  }
-
-
-
+    ),
+  );
   
+  
+
+  return Stack(
+    children: <Widget> [
+      Positioned(
+        top: -100.0,
+        child: orangeBox2
+        )
+    ],
+  );
+}
 }
