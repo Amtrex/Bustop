@@ -44,8 +44,8 @@ class ScrollPage extends StatelessWidget {
           child: Column(
         children: [
           SizedBox(height: 20.0,),
-          Text('Bustop', style: TextStyle(color: Colors.white, fontSize: 50.0),),
-          Text('Bienvenidos', style: TextStyle(color: Colors.white, fontSize: 20.0),),
+          Text('BUSTOP', style: TextStyle(color: Colors.white, fontSize: 50.0),),
+          Text('¡Bienvenidos!', style: TextStyle(color: Colors.white, fontSize: 20.0),),
           Expanded( child: Container(), ),
           Icon(Icons.keyboard_arrow_down, size: 90.0, color: Colors.white,)
         ],
@@ -67,24 +67,51 @@ class ScrollPage extends StatelessWidget {
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children:[
+            
             RaisedButton(
               shape: StadiumBorder(),
-              child: Text('Login'),
+              color: Colors.white,
+              child: Padding(
+                child:Text('INGRESAR',),
+                padding: EdgeInsets.symmetric(horizontal:90.0,vertical:15.0),
+              ),
               onPressed: (){
+                print('Click Ingresar');
               },
             ),
-            SizedBox(width: 20.0,),
+            SizedBox(
+              height: 40.0,
+            ),
             RaisedButton(
               shape: StadiumBorder(),
-              child: Text('Register'),
-              onPressed: (){},
+              color: Colors.white,
+              child: Padding(
+                child:Text('REGISTRARSE',),
+                padding: EdgeInsets.symmetric(horizontal:80.0,vertical:15.0),
+              ),
+              onPressed: (){ 
+                print('Click Registrarse');},
             ),
           ],
         ),
       ),
     );
   }
+
+   Widget _textos2(){
+    return SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(height: 40.0,),
+          Text('Selecciona la accion que quieres realizar', style: TextStyle(color: Colors.white, fontSize: 30.0),),
+        ],
+      ),
+    );
+  }
+
+
 
   
 }
