@@ -42,7 +42,8 @@ class ScrollPage extends StatelessWidget {
   Widget _textos(){
     return SafeArea(
           child: Column(
-        children: [
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
           SizedBox(height: 20.0,),
           Text('BUSTOP', style: TextStyle(color: Colors.white, fontSize: 50.0),),
           Text('¡Bienvenidos!', style: TextStyle(color: Colors.white, fontSize: 20.0),),
@@ -52,13 +53,6 @@ class ScrollPage extends StatelessWidget {
       ),
     );
   }
-
-
-
-
-
-
-
     Widget _pagina2(){
     return Container(
       width : double.infinity,
