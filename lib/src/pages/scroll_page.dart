@@ -7,7 +7,7 @@ class ScrollPage extends StatefulWidget {
   @override
   _ScrollPageState createState() => _ScrollPageState();
 }
-String nombre = "jose" ;
+
 class _ScrollPageState extends State<ScrollPage> {
   @override
   Widget build(BuildContext context) {

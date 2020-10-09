@@ -1,4 +1,6 @@
+import 'package:bustop/src/pages/Register_pages.dart';
 import 'package:bustop/src/pages/home_page.dart';
+import 'package:bustop/src/pages/login_page.dart';
 import 'package:bustop/src/pages/scroll_page.dart';
 import 'package:flutter/material.dart';
  
@@ -14,7 +16,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/'   : (BuildContext context)=>ScrollPage(),
         'home': (BuildContext context)=>HomePage(),
-        
+        'register':(BuildContext context)=>RegisterPage(), 
+        'login' :(BuildContext context)=>LoginPage(),
       },
     );
   }

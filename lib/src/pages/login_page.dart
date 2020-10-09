@@ -16,15 +16,14 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget loginPage(context){
     return Container(
-      width : double.infinity,
-      height: double.infinity,
-      color: Color.fromRGBO(255, 255, 255, 1),
+
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children:[
+            
              SizedBox(
-              height: 300.0,
+              height: 250.0,
             ), 
             Container(              
                width: 320.0,
@@ -80,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
              Container(
               child: GestureDetector(
                 child: Text("¿Aun no tienes cuenta? ¡Registrate!" , style: TextStyle(color: Color(0xffea5724), fontSize: 12.0, )),
-                onTap:(){Navigator.pushNamed(context, 'home');}
+                onTap:(){Navigator.pushNamed(context,'register');}
               )
             ),
             SizedBox(
