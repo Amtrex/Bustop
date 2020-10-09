@@ -8,13 +8,24 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Scaffold(
+      body:Stack(
       children: <Widget>[
-        _fondoApp(),
+        backApp(),  
+
+        SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              
+              tittles()
+            ],
+          ),
+        )
       ],
+      ),
     );
   }
-Widget _fondoApp(){
+Widget backApp(){
   final gradiente = Container(
     width: double.infinity,
     height: double.infinity,
@@ -54,5 +65,16 @@ Widget _fondoApp(){
   );
 }
 
+Widget tittles(){
+return Container(
+  padding: EdgeInsets.all(40.0),
+child: Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: <Widget> [
+    Text("Bustop", style: TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),)
+  ],
+)
+);
+}
 
 }
