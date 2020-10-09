@@ -74,6 +74,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
            Expanded( child: Container(), ), 
             RaisedButton(
+              elevation: 8.0,
               shape: StadiumBorder(),
               color: Color(0xffdc4d1e),
               child: Padding(

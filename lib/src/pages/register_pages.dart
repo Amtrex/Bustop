@@ -34,6 +34,7 @@ class RegisterPage  extends StatelessWidget {
             ),
 
                RaisedButton(
+                 elevation: 8.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25.0),
                 side: BorderSide(color: Color(0xffdc4d1e))
