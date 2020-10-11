@@ -1,6 +1,5 @@
 
 import 'dart:math';
-
 import 'package:bustop/src/pages/scroll_page.dart';
 import 'package:flutter/material.dart';
 class LoginPage extends StatefulWidget {
@@ -34,38 +33,55 @@ class _LoginPageState extends State<LoginPage> {
              SizedBox(
               height: 320.0,
             ), 
-            Container(              
-               width: 320.0,
-              child:
-              TextFormField(
-                    maxLength: 20,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.person),
-                      border: OutlineInputBorder(borderRadius:BorderRadius.circular(30)),
-                        hintText: ('Correo'),
-                      contentPadding: new EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-
-                    ),
-                    validator: (input) => !input.contains('@') ? 'Not a valid Email' : null,
-                  ),           
+            Theme(
+                          child: Container(              
+                 width: 320.0,
+                child:
+                TextFormField(
+                      maxLength: 20,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.person),
+                        border: OutlineInputBorder(borderRadius:BorderRadius.circular(30)),
+                          hintText: ('Correo'),
+                        contentPadding: new EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                            borderSide: BorderSide(width: 1,color: Color.fromRGBO(251, 85, 23, 1),),
+                          ),
+                      ),
+                      validator: (input) => !input.contains('@') ? 'Not a valid Email' : null,
+                    ),           
+              ),
+               data: Theme.of(context)
+                                  .copyWith(primaryColor: Color.fromRGBO(251, 85, 23, 1),),
             ),                
               SizedBox(
               height: 20.0,
             ),
-            Container(
-              width: 320.0,
-              child: TextFormField(
-                      maxLength: 20,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.lock_open),
-                        border: OutlineInputBorder(borderRadius:BorderRadius.circular(30) ),
-                          hintText: ('Contraseña'),
-                          contentPadding: new EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                      ),
-                      validator: (input) => !input.contains('@') ? 'Not a valid Email' : null,
-                      obscureText: true,
-                    ),
-            ),
+            Theme(
+                          child: Container(
+                width: 320.0,
+                child: TextFormField(
+                        maxLength: 20,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.lock_open),
+                          
+                          border: OutlineInputBorder(borderRadius:BorderRadius.circular(30) ),
+                            hintText: ('Contraseña'),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                            borderSide: BorderSide(width: 1,color: Color.fromRGBO(251, 85, 23, 1),),
+                          ),
+                            contentPadding: new EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                        ),
+                        autofocus: true,
+                        validator: (input) => !input.contains('@') ? 'Not a valid Email' : null,
+                        obscureText: true,
+                      ),      
+              ),
+              data: Theme.of(context)
+              .copyWith(primaryColor: Color.fromRGBO(251, 85, 23, 1),),
+             ),
                Container(
               child: GestureDetector(
                 child: Text("¿Tienes problemas con tu usuario o contraseña?"),
@@ -81,7 +97,9 @@ class _LoginPageState extends State<LoginPage> {
                 child:Text('INGRESAR', style: TextStyle( color: Colors.white),),
                 padding: EdgeInsets.symmetric(horizontal:90.0,vertical:15.0),
               ),
-              onPressed: (){},
+              onPressed: (){
+                Navigator.pushNamed(context, 'home');
+              },
             ),
               SizedBox(
               height: 10.0,

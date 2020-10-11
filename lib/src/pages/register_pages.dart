@@ -216,7 +216,7 @@ child: Column(
 child: Column(
   crossAxisAlignment: CrossAxisAlignment.start,
   children: <Widget> [
-    Text("Ingresar", style: TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),)
+    Text("Registrate", style: TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),)
   ],
 )
 );

@@ -23,6 +23,22 @@ class HomePage extends StatelessWidget {
         )
       ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          title: Text("Inicio"),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.map),
+          title: Text("Mapa"),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.camera),
+          title: Text("Escanear QR"),
+        ),
+        ],
+      ),
     );
   }
 Widget backApp(){
