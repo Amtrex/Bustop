@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                                   .copyWith(primaryColor: Color.fromRGBO(251, 85, 23, 1),),
             ),                
               SizedBox(
-              height: 20.0,
+              height: 10.0,
             ),
             Theme(
                           child: Container(
@@ -88,7 +88,8 @@ class _LoginPageState extends State<LoginPage> {
                 onTap:(){Navigator.pushNamed(context, '/');}
               )
             ),
-           Expanded( child: Container(), ), 
+           Expanded( 
+             child: Container(), ), 
             RaisedButton(
               elevation: 8.0,
               shape: StadiumBorder(),
@@ -102,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
               SizedBox(
-              height: 10.0,
+              height: 6.0,
             ),
              Container(
               child: GestureDetector(
@@ -111,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
               )
             ),
             SizedBox(
-              height: 30.0,
+              height: 28.0,
             ),        
           ],
         ),
