@@ -7,7 +7,9 @@ class HomePage extends StatelessWidget {
   
 
   @override
+  
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body:Stack(
       children: <Widget>[
@@ -17,31 +19,17 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               
-              tittles()
+              tittles(),
+              circleBottoms()
             ],
           ),
         )
       ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          title: Text("Inicio"),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.map),
-          title: Text("Mapa"),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.camera),
-          title: Text("Escanear QR"),
-        ),
-        ],
-      ),
+      bottomNavigationBar: botonNavigationBar(context),
     );
   }
-Widget backApp(){
+  Widget backApp(){
   final gradiente = Container(
     width: double.infinity,
     height: double.infinity,
@@ -57,10 +45,10 @@ Widget backApp(){
   );
 
   final orangeBox = Transform.rotate(
-    angle: -pi / 4.3,
+    angle: -pi / 4.0,
     child: Container(
-      height: 360.0,
-      width: 360.0,
+      height: 350.0,
+      width: 300.0,
       decoration: BoxDecoration(
         color: Color.fromRGBO(251, 85, 23, 1),
         borderRadius: BorderRadius.circular(60.0)
@@ -80,17 +68,87 @@ Widget backApp(){
     ],
   );
 }
-
-Widget tittles(){
+  Widget tittles(){
 return Container(
-  padding: EdgeInsets.all(40.0),
+  padding: EdgeInsets.all(30.0),
 child: Column(
-  crossAxisAlignment: CrossAxisAlignment.start,
-  children: <Widget> [
-    Text("Bustop", style: TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),)
+  children: <Widget>[
+    image(),
   ],
 )
 );
 }
+  Widget image(){
+  return Image(
+        image: AssetImage('assets/logoW.png'),
+        height: 120,
+        width: 120,
+        );
+}
+  Widget botonNavigationBar(BuildContext context){
+    return Theme(
+      data: Theme.of(context).copyWith(
+        canvasColor: Colors.white60,
+        primaryColor: Color.fromRGBO(251, 85, 23, 1),
+        textTheme: Theme.of(context).textTheme.copyWith(caption:TextStyle(color: Color.fromRGBO(245, 148, 115, 0.9)))
+
+      ) ,
+      child:  BottomNavigationBar(
+        fixedColor: Color.fromRGBO(251, 85, 23, 1),
+        items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home, size: 35.0,),
+          title: Text("Inicio"),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.map, size: 35.0,),
+          title: Text("Mapa"),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.camera, size: 35.0,),
+          title: Text("Escanear QR"),
+        ),
+        ],
+      ),
+    );
+  }
+  Widget circleBottoms(){
+    return Table(
+      children: [
+        TableRow(
+          children: [
+            createCircleBottom(),
+            createCircleBottom(),
+          ]
+        ),
+        TableRow(
+          children: [
+            createCircleBottom(),
+            createCircleBottom(),
+          ]
+        ),
+        TableRow(
+          children: [
+            createCircleBottom(),
+            createCircleBottom(),
+          ]
+        ),
+      ],
+    );
+  }
+  Widget createCircleBottom(){
+    return Container(
+      height: 150,
+      margin: EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+        color: Color.fromRGBO(245, 148, 115, 0.70)
+      ),
+    );
+  }
 
 }
+
+
+
+
+
