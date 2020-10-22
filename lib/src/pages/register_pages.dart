@@ -2,223 +2,222 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class RegisterPage  extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  @override
-   Widget build(BuildContext context) {
+  double myHeight = 0.0;
+  double myWidth = 0.0;
+  Widget build(BuildContext context) {
+    this.myHeight = MediaQuery.of(context).size.height * 0.03;
+    this.myWidth = MediaQuery.of(context).size.width * 0.08;
+
     return Scaffold(
       body: Stack(
         children: <Widget>[
-         backApp(),
-        registerPage(),
-        Center(
-        child: tittles(),
+          backApp(),
+          registerPage(),
+          Center(
+            child: tittles(),
+          ),
+        ],
       ),
-        ], 
-      ),
-    );  
+    );
   }
 
-    Widget registerPage(){
+  Widget registerPage() {
     return Container(
       child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:[
-             SizedBox(
-              height: 293.0,
-            ), 
-
-             Container(
-               width: 320.0,
-                child: 
-                Text("¿Con cual de los siguientes perfiles quisieras registrarte?",
-                 textAlign: TextAlign.center,
-                ),   
-            ),
-
+        child: ListView(
+          //  mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             SizedBox(
-              height: 50.0,
+              height: 240,
             ),
-
-               RaisedButton(
-                 elevation: 8.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25.0),
-                side: BorderSide(color: Color(0xffdc4d1e))
+            Container(
+              width: 320.0,
+              child: Text(
+                "¿Con cual de los siguientes perfiles quisieras registrarte?",
+                textAlign: TextAlign.center,
               ),
-              color: Color(0xffffffff),
-              child: Padding(
-                child:Text('Usuario', style: TextStyle( color: Color(0xffdc4d1e)),),
-                padding: EdgeInsets.symmetric(horizontal:100.0,vertical:15.0),
-              ),
-              onPressed: (){},
             ),
-              SizedBox(
-              height: 10.0,
+            SizedBox(
+              height: myHeight,
             ),
-
             RaisedButton(
               elevation: 8.0,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25.0),
-                side: BorderSide(color: Color(0xffdc4d1e))
-              ),
+                  borderRadius: BorderRadius.circular(25.0),
+                  side: BorderSide(color: Color(0xffdc4d1e))),
               color: Color(0xffffffff),
               child: Padding(
-                child:Text('Conductor', style: TextStyle( color: Color(0xffdc4d1e)),),
-                padding: EdgeInsets.symmetric(horizontal:92.0,vertical:15.0),
+                child: Text(
+                  'Usuario',
+                  style: TextStyle(color: Color(0xffdc4d1e)),
+                ),
+                padding:
+                    EdgeInsets.symmetric(horizontal: 100.0, vertical: 15.0),
               ),
-              onPressed: (){},
+              onPressed: () {},
             ),
-              SizedBox(
-              height: 10.0,
+            SizedBox(
+              height: myHeight,
             ),
-
             RaisedButton(
               elevation: 8.0,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25.0),
-                side: BorderSide(color: Color(0xffdc4d1e))
-              ),
+                  borderRadius: BorderRadius.circular(25.0),
+                  side: BorderSide(color: Color(0xffdc4d1e))),
               color: Color(0xffffffff),
               child: Padding(
-                child:Text('Personal de control', style: TextStyle( color: Color(0xffdc4d1e)),),
-                padding: EdgeInsets.symmetric(horizontal:65.0,vertical:15.0),
+                child: Text(
+                  'Conductor',
+                  style: TextStyle(color: Color(0xffdc4d1e)),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 92.0, vertical: 15.0),
               ),
-              onPressed: (){},
+              onPressed: () {},
             ),
-              SizedBox(
-              height: 10.0,
+            SizedBox(
+              height: myHeight,
             ),
-
             RaisedButton(
               elevation: 8.0,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25.0),
-                side: BorderSide(color: Color(0xffdc4d1e))
-              ),
+                  borderRadius: BorderRadius.circular(25.0),
+                  side: BorderSide(color: Color(0xffdc4d1e))),
               color: Color(0xffffffff),
               child: Padding(
-                child:Text('Administrativo', style: TextStyle( color: Color(0xffdc4d1e)),),
-                padding: EdgeInsets.symmetric(horizontal:80.0,vertical:15.0),
+                child: Text(
+                  'Personal de control',
+                  style: TextStyle(color: Color(0xffdc4d1e)),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 65.0, vertical: 15.0),
               ),
-              onPressed: (){},
+              onPressed: () {},
             ),
-              SizedBox(
-              height: 10.0,
+            SizedBox(
+              height: myHeight,
             ),
-            
-            
-              
-           Expanded( child: Container(), ), 
+            RaisedButton(
+              elevation: 8.0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                  side: BorderSide(color: Color(0xffdc4d1e))),
+              color: Color(0xffffffff),
+              child: Padding(
+                child: Text(
+                  'Administrativo',
+                  style: TextStyle(color: Color(0xffdc4d1e)),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
+              ),
+              onPressed: () {},
+            ),
+           
+            Container(
+              height: 70,
+            ),
             RaisedButton(
               elevation: 8.0,
               shape: StadiumBorder(),
               color: Color(0xffdc4d1e),
               child: Padding(
-                child:Text('CONTINUAR', style: TextStyle( color: Color(0xffffffff)),),
-                padding: EdgeInsets.symmetric(horizontal:90.0,vertical:15.0),
+                child: Text(
+                  'CONTINUAR',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Color(0xffffffff),
+                  ),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 90.0, vertical: 15.0),
               ),
-              onPressed: (){},
+              onPressed: () {},
             ),
-              SizedBox(
-              height: 10.0,
-            ),
-             Container(
-              child: GestureDetector(
-                child: Text("¿Ya tienes una cuenta?¡Ingresa!" , style: TextStyle(color: Color(0xffea5724), fontSize: 12.0, )),
-                onTap:(){Navigator.pushNamed(context, '/');}
-              )
-            ),
-            SizedBox(
-              height: 30.0,
-            ),        
+
+            Center(
+                child: GestureDetector(
+                    child: Text("¿Ya tienes una cuenta?¡Ingresa!",
+                        style: TextStyle(
+                          color: Color(0xffea5724),
+                          fontSize: 12.0,
+                        )),
+                    onTap: () {
+                      Navigator.pushNamed(context, '/');
+                    })),
           ],
         ),
       ),
     );
-}
-    Widget backApp(){
-        SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                
-                ],
-              ),
-            );
-      final gradiente = Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: FractionalOffset(0.0,0.6),
-            end: FractionalOffset(0.0,1.0),
-            colors: [
-              Colors.white,
-                Color.fromRGBO(200, 200, 200, 1)
-            ]),
-          ),
-      );
+  }
 
-      final orangeBox = Transform.rotate(
-        angle: -pi / 1.0,
-        child: Container(
-          height: 360.0,
-          width: 360.0,
-          decoration: BoxDecoration(
+  Widget backApp() {
+    SingleChildScrollView(
+      child: Column(
+        children: <Widget>[],
+      ),
+    );
+    final gradiente = Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+            begin: FractionalOffset(0.0, 0.6),
+            end: FractionalOffset(0.0, 1.0),
+            colors: [Colors.white, Color.fromRGBO(200, 200, 200, 1)]),
+      ),
+    );
+
+    final orangeBox = Transform.rotate(
+      angle: -pi / 1.0,
+      child: Container(
+        height: 360.0,
+        width: 360.0,
+        decoration: BoxDecoration(
             color: Color.fromRGBO(251, 85, 23, 1),
             borderRadius: BorderRadius.only(
-              topRight: Radius.circular(120.0),
-              topLeft: Radius.circular(20.0)
-            )
-          ),
-        ),
-      );
-      
-      
+                topRight: Radius.circular(120.0),
+                topLeft: Radius.circular(20.0))),
+      ),
+    );
 
-      return Stack(
-        children: <Widget> [
-          gradiente,
-          Positioned(
-            top: -100.0,
-            child: orangeBox
+    return Stack(
+      children: <Widget>[gradiente, Positioned(top: -100.0, child: orangeBox)],
+    );
+  }
+
+  Widget tittles() {
+    return Container(
+        padding: EdgeInsets.all(60.0),
+        child: Column(
+          children: <Widget>[image(), desc()],
+        ));
+  }
+
+  Widget image() {
+    return Image(
+      image: AssetImage('assets/logoW.png'),
+      height: 120,
+      width: 120,
+    );
+  }
+
+  Widget desc() {
+    return Container(
+        padding: EdgeInsets.all(40.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              "Registrate",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold),
             )
-        ],
-      );
-    }
-    Widget tittles(){
-return Container(
-  padding: EdgeInsets.all(60.0),
-child: Column(
-  children: <Widget>[
-    image(),
-    desc()
-  ],
-)
-);
-}
-    Widget image(){
-  return Image(
-        image: AssetImage('assets/logoW.png'),
-        height: 120,
-        width: 120,
-        );
-}
-    Widget desc(){
-  return Container(
-  padding: EdgeInsets.all(40.0),
-child: Column(
-  crossAxisAlignment: CrossAxisAlignment.start,
-  children: <Widget> [
-    Text("Ingresar", style: TextStyle(color: Colors.white, fontSize: 30.0, fontWeight: FontWeight.bold),)
-  ],
-)
-);
-}
+          ],
+        ));
+  }
 }
