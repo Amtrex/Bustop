@@ -90,26 +90,57 @@ child: Column(
       data: Theme.of(context).copyWith(
         canvasColor: Colors.white60,
         primaryColor: Color.fromRGBO(251, 85, 23, 1),
-        textTheme: Theme.of(context).textTheme.copyWith(caption:TextStyle(color: Color.fromRGBO(245, 148, 115, 0.9)))
+        textTheme: Theme.of(context).textTheme.copyWith(caption:TextStyle(color: Color.fromRGBO(169, 169, 168, 0.9)))
 
       ) ,
-      child:  BottomNavigationBar(
-        fixedColor: Color.fromRGBO(251, 85, 23, 1),
-        items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home, size: 35.0,),
-          title: Text("Inicio"),
+      child: BottomNavigationBar(
+          onTap: (tabIndex) {
+            print(tabIndex);
+            if (tabIndex == 0) {
+              Navigator.of(context).pushNamed(
+                'home',
+              );
+            }
+            
+            if (tabIndex == 2) {
+              Navigator.of(context).pushNamed(
+                'qr',
+              );
+            }
+            if (tabIndex == 2) {
+              Navigator.of(context).pushNamed(
+                'qr',
+              );
+            }
+          },
+          unselectedItemColor: Color.fromRGBO(150, 139, 139, .9),
+          selectedItemColor: Color.fromRGBO(164, 45, 47, .9),
+          showUnselectedLabels: true,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+                color: Color.fromRGBO(164, 45, 47, .9),
+              ),
+              title: Text('Inicio'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.map,
+                color:Color.fromRGBO(150, 139, 139, .9),
+              ),
+              title: Text('Mapa'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.code,
+                color: Color.fromRGBO(150, 139, 139, .9),
+              ),
+              title: Text('QR'),
+            ),
+
+          ],
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.map, size: 35.0,),
-          title: Text("Mapa"),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.camera, size: 35.0,),
-          title: Text("Escanear QR"),
-        ),
-        ],
-      ),
     );
   }
   Widget circleBottoms(){
@@ -141,7 +172,8 @@ child: Column(
       height: 150,
       margin: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
-        color: Color.fromRGBO(245, 148, 115, 0.70)
+        color: Color.fromRGBO(193, 193, 191, 0.8),
+        borderRadius: BorderRadius.circular(15.0)
       ),
     );
   }
