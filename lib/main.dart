@@ -7,12 +7,16 @@ import 'package:bustop/src/pages/scan.dart';
 import 'package:bustop/src/pages/scroll_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
  
 void main() => runApp(MyApp());
  
 class MyApp extends StatelessWidget {
- 
+
   Widget build(BuildContext context) {
+     SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle.light.copyWith(
+      statusBarColor: Colors.transparent
+));
      SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitDown,
       DeviceOrientation.portraitUp,
