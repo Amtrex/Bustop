@@ -78,9 +78,9 @@ class _HomePageState extends State<QrPage> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.code,
-                color: Color.fromRGBO(164, 45, 47, .9),
+                color: Color.fromRGBO(251, 85, 23, 1),
               ),
-              title: Text('QR'),
+              title: Text('QR', style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1)),),
             ),
 
           ],
@@ -98,11 +98,11 @@ class _HomePageState extends State<QrPage> {
       },
       child: Text(
         text,
-        style: TextStyle(color: Color(0xffdc4d1e),fontWeight: FontWeight.bold),
+        style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1),fontWeight: FontWeight.bold),
       ),
 
       shape: RoundedRectangleBorder(
-          side: BorderSide(color: Color(0xffdc4d1e),width: 3.0),
+          side: BorderSide(color: Color.fromRGBO(251, 85, 23, 1),width: 3.0),
           borderRadius: BorderRadius.circular(20.0)),
     );
   }

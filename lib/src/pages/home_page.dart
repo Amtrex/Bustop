@@ -91,20 +91,15 @@ class HomePage extends StatelessWidget {
                 'qr',
               );
             }
-            if (tabIndex == 2) {
-              Navigator.of(context).pushNamed(
-                'qr',
-              );
-            }
           },
           unselectedItemColor: Color.fromRGBO(150, 139, 139, .9),
-          selectedItemColor: Color.fromRGBO(164, 45, 47, .9),
+          selectedItemColor: Color.fromRGBO(251, 85, 23, 1),
           showUnselectedLabels: true,
           items: [
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.home,
-                color: Color.fromRGBO(164, 45, 47, .9),
+                color: Color.fromRGBO(251, 85, 23, 1),
               ),
               title: Text('Inicio'),
             ),
