@@ -1,6 +1,6 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
+
 class BackApp extends StatelessWidget {
   const BackApp({
     Key key,
@@ -8,7 +8,6 @@ class BackApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     SingleChildScrollView(
       child: Column(
         children: <Widget>[],
@@ -43,3 +42,59 @@ class BackApp extends StatelessWidget {
     );
   }
 }
+
+class TopScreen extends StatelessWidget {
+   const TopScreen({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(251, 85, 23, 1),
+      ),
+      body: BackApp(),
+    );
+}
+}
+class Tittles extends StatelessWidget {
+  const Tittles({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.all(60.0),
+        child: Column(
+          children: <Widget>[image(), desc()],
+        ));
+  }
+  Widget image() {
+    return Image(
+      image: AssetImage('assets/logoW.png'),
+      height: 120,
+      width: 120,
+    );
+  }
+
+  Widget desc() {
+    return Container(
+        padding: EdgeInsets.all(40.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              "Registrate",
+              style: TextStyle(
+                decoration: TextDecoration.none,
+                  color: Colors.white,
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold),
+            )
+          ],
+        ));
+  }
+}
+

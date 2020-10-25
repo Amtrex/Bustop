@@ -1,10 +1,6 @@
 import 'dart:math';
-
 import 'package:bustop/src/pages/home_page.dart';
-import 'package:bustop/src/pages/loginPage.dart';
 import 'package:flutter/material.dart';
-
-import 'loginPage.dart';
 import 'login_page.dart';
 class ScrollPage extends StatefulWidget {
   @override

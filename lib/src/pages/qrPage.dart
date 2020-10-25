@@ -27,69 +27,68 @@ class _HomePageState extends State<QrPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Image(image: AssetImage('assets/Qricon.png'),
-            height: 300,
-            width: 120, ),
+            Image(
+              image: AssetImage('assets/Qricon.png'),
+              height: 300,
+              width: 120,
+            ),
             flatButton("Scanear codigo QR", ScanPage()),
-            SizedBox(height: 20.0,),
+            SizedBox(
+              height: 20.0,
+            ),
             flatButton("Crear codigo QR", GeneratePage()),
           ],
         ),
       ),
-
       bottomNavigationBar: BottomNavigationBar(
-          onTap: (tabIndex) {
-            print(tabIndex);
-            if (tabIndex == 0) {
-              Navigator.of(context).pushNamed(
-                'home',
-              );
-            }
-            
-            if (tabIndex == 2) {
-              Navigator.of(context).pushNamed(
-                '',
-              );
-            }
-            if (tabIndex == 2) {
-              Navigator.of(context).pushNamed(
-                'qr',
-              );
-            }
-          },
-          unselectedItemColor: Color.fromRGBO(150, 139, 139, .9),
-          selectedItemColor: Color.fromRGBO(150, 139, 139, .9),
-          showUnselectedLabels: true,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color:Color.fromRGBO(150, 139, 139, .9),
-              ),
-              title: Text('Inicio'),
+        onTap: (tabIndex) {
+          print(tabIndex);
+          if (tabIndex == 0) {
+            Navigator.of(context).pushNamed(
+              'home',
+            );
+          }
+          if (tabIndex == 2) {
+            Navigator.of(context).pushNamed(
+              'qr',
+            );
+          }
+        },
+        unselectedItemColor: Color.fromRGBO(150, 139, 139, .9),
+        selectedItemColor: Color.fromRGBO(150, 139, 139, .9),
+        showUnselectedLabels: true,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              color: Color.fromRGBO(150, 139, 139, .9),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.map,
-                color:Color.fromRGBO(150, 139, 139, .9),
-              ),
-              title: Text('Mapa'),
+            title: Text('Inicio'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.map,
+              color: Color.fromRGBO(150, 139, 139, .9),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.code,
-                color: Color.fromRGBO(251, 85, 23, 1),
-              ),
-              title: Text('QR', style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1)),),
+            title: Text('Mapa'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.code,
+              color: Color.fromRGBO(251, 85, 23, 1),
             ),
-          ],
-        ),
+            title: Text(
+              'QR',
+              style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1)),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget flatButton(String text, Widget widget) {
     return FlatButton(
-      
       padding: EdgeInsets.all(15.0),
       onPressed: () async {
         Navigator.of(context)
@@ -97,11 +96,11 @@ class _HomePageState extends State<QrPage> {
       },
       child: Text(
         text,
-        style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1),fontWeight: FontWeight.bold),
+        style: TextStyle(
+            color: Color.fromRGBO(251, 85, 23, 1), fontWeight: FontWeight.bold),
       ),
-
       shape: RoundedRectangleBorder(
-          side: BorderSide(color: Color.fromRGBO(251, 85, 23, 1),width: 3.0),
+          side: BorderSide(color: Color.fromRGBO(251, 85, 23, 1), width: 3.0),
           borderRadius: BorderRadius.circular(20.0)),
     );
   }

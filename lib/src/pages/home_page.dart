@@ -1,7 +1,5 @@
 import 'dart:math';
 import 'dart:ui';
-
-import 'package:bustop/src/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -82,13 +80,7 @@ class HomePage extends StatelessWidget {
       ) ,
       child: BottomNavigationBar(
           onTap: (tabIndex) {
-            print(tabIndex);
-            if (tabIndex == 0) {
-              Navigator.of(context).pushNamed(
-                'home',
-              );
-            }
-            
+            print(tabIndex);        
             if (tabIndex == 2) {
               Navigator.of(context).pushNamed(
                 'qr',
