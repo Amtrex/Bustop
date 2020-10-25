@@ -82,7 +82,6 @@ class _HomePageState extends State<QrPage> {
               ),
               title: Text('QR', style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1)),),
             ),
-
           ],
         ),
     );

@@ -5,8 +5,10 @@ import 'package:bustop/src/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
+        FocusScope.of(context).requestFocus(FocusNode());
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -69,6 +71,7 @@ class HomePage extends StatelessWidget {
   }
 
   Widget botonNavigationBar(BuildContext context) {
+    // FocusScope.of(context).requestFocus(FocusNode());
     return Theme(
       data: Theme.of(context).copyWith(
 

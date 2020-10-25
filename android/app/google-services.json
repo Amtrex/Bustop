@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "891843849414",
+    "firebase_url": "https://bd-bustop.firebaseio.com",
+    "project_id": "bd-bustop",
+    "storage_bucket": "bd-bustop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891843849414:android:8e81b29e8a7cd6b6f83bc7",
+        "android_client_info": {
+          "package_name": "com.example.bustop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "891843849414-l132khihrp0enpubi9pvjqo3l26vgeee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPKXjgGWfVQnCGypQ3ugPMb9oB8Mbh0EM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "891843849414-l132khihrp0enpubi9pvjqo3l26vgeee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

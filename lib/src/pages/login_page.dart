@@ -1,6 +1,4 @@
-import 'dart:ffi';
-import 'dart:math';
-import 'package:bustop/src/pages/scroll_page.dart';
+import 'package:bustop/src/Widgets/styleWidgets.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,10 +9,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    
     return Stack(
       children: [
-        backApp(),
+        BackApp(),
         loginPage(),
         Center(
           child: tittles(),
@@ -22,11 +19,8 @@ class _LoginPageState extends State<LoginPage> {
       ],
     );
   }
-  
 
-
-  Widget loginPage(){
-
+  Widget loginPage() {
     //Para la comprovacion de los datos
     final formKey = GlobalKey<FormState>();
     String _correo, _contrasena;
@@ -36,152 +30,136 @@ class _LoginPageState extends State<LoginPage> {
         child: Form(
           key: formKey,
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:[
-                
-                 SizedBox(
-                  height: 320.0,
-                ), 
-                Theme(
-                              child: Container(              
-                     width: 320.0,
-                    child:
-                    TextFormField(
-                          maxLength: 20,
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.person),
-                            border: OutlineInputBorder(borderRadius:BorderRadius.circular(30)),
-                              hintText: ('Correo'),
-                            contentPadding: new EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(30)),
-                                borderSide: BorderSide(width: 1,color: Color.fromRGBO(251, 85, 23, 1),),
-                              ),
-                          ),
-                          validator: (input) => !input.contains('control') ? 'Este Usuario no existe, intenta nuevamente' : null,
-                          onSaved: (input) => _correo = input,
-                        ),   
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 320.0,
+              ),
+              Theme(
+                child: Container(
+                  width: 320.0,
+                  child: TextFormField(
+                    maxLength: 20,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.person),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      hintText: ('Correo'),
+                      contentPadding: new EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 2.0),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        borderSide: BorderSide(
+                          width: 1,
+                          color: Color.fromRGBO(251, 85, 23, 1),
+                        ),
+                      ),
+                    ),
+                    validator: (input) => !input.contains('control')
+                        ? 'Este Usuario no existe, intenta nuevamente'
+                        : null,
+                    onSaved: (input) => _correo = input,
                   ),
-                   data: Theme.of(context)
-                                      .copyWith(primaryColor: Color.fromRGBO(251, 85, 23, 1),),
-                ),                
-                  SizedBox(
-                  height: 10.0,
                 ),
-                
-                Theme(
-                              child: Container(
-                    width: 320.0,
-                    child: TextFormField(
-                            maxLength: 20,
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.lock_open),
-                              
-                              border: OutlineInputBorder(borderRadius:BorderRadius.circular(30) ),
-                                hintText: ('Contraseña'),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(30)),
-                                borderSide: BorderSide(width: 1,color: Color.fromRGBO(251, 85, 23, 1),),
-                              ),
-                                contentPadding: new EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                            ),
-                            autofocus: true,
-                            validator: (input) => input.length < 8 ? 'Tu contraseña es demasiado corta intenta con otra' : null,
-                            onSaved: (input) => _contrasena = input,
-                            obscureText: true,
-                          ),      
+                data: Theme.of(context).copyWith(
+                  primaryColor: Color.fromRGBO(251, 85, 23, 1),
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+
+              Theme(
+                child: Container(
+                  width: 320.0,
+                  child: TextFormField(
+                    maxLength: 20,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.lock_open),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      hintText: ('Contraseña'),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        borderSide: BorderSide(
+                          width: 1,
+                          color: Color.fromRGBO(251, 85, 23, 1),
+                        ),
+                      ),
+                      contentPadding: new EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 2.0),
+                    ),
+                    autofocus: true,
+                    validator: (input) => input.length < 8
+                        ? 'Tu contraseña es demasiado corta intenta con otra'
+                        : null,
+                    onSaved: (input) => _contrasena = input,
+                    obscureText: true,
                   ),
-                  data: Theme.of(context)
-                  .copyWith(primaryColor: Color.fromRGBO(251, 85, 23, 1),),
-                 ),
-                   Container(
+                ),
+                data: Theme.of(context).copyWith(
+                  primaryColor: Color.fromRGBO(251, 85, 23, 1),
+                ),
+              ),
+              Container(
                   child: GestureDetector(
-                    child: Text("¿Tienes problemas con tu usuario o contraseña?"),
-                    onTap:(){Navigator.pushNamed(context, '/');}
-                  )
-                ),
-               Expanded( 
-                 child: Container(), ), 
-                RaisedButton(
-                  elevation: 8.0,
-                  shape: StadiumBorder(),
-                  color: Color(0xffdc4d1e),
-                  child: Padding(
-                    child:Text('INGRESAR', style: TextStyle( color: Colors.white),),
-                    padding: EdgeInsets.symmetric(horizontal:90.0,vertical:15.0),
+                      child: Text(
+                          "¿Tienes problemas con tu usuario o contraseña?"),
+                      onTap: () {
+                        Navigator.pushNamed(context, '/');
+                      })),
+              Expanded(
+                child: Container(),
+              ),
+              RaisedButton(
+                elevation: 8.0,
+                shape: StadiumBorder(),
+                color: Color(0xffdc4d1e),
+                child: Padding(
+                  child: Text(
+                    'INGRESAR',
+                    style: TextStyle(color: Colors.white),
                   ),
-
-                  //onPressed: _validar,
-                
-                  
-                  onPressed: (){
-                    Navigator.pushNamed(context, 'home');
-                  },
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 90.0, vertical: 15.0),
                 ),
 
-                //Funcion submit----------------
+                //onPressed: _validar,
 
-                 //Void _validar (){
-                  //if(formKey.currentState.validate()){
-                   //formKey.currentState.save();
-                   //print(_correo);
-                  //print(_contrasena);
-                //}},
-              
-                
-                  SizedBox(
-                  height: 6.0,
-                ),
-                 Container(
+                onPressed: () {
+                  Navigator.pushNamed(context, 'home');
+                },
+              ),
+
+              //Funcion submit----------------
+
+              //Void _validar (){
+              //if(formKey.currentState.validate()){
+              //formKey.currentState.save();
+              //print(_correo);
+              //print(_contrasena);
+              //}},
+
+              SizedBox(
+                height: 6.0,
+              ),
+              Container(
                   child: GestureDetector(
-                    child: Text("¿Aun no tienes cuenta? ¡Registrate!" , style: TextStyle(color: Color(0xffea5724), fontSize: 12.0, )),
-                    onTap:(){Navigator.pushNamed(context,'register');}
-                  )
-                ),
-                SizedBox(
-                  height: 28.0,
-                ),        
-              ],
-            ),
-
+                      child: Text("¿Aun no tienes cuenta? ¡Registrate!",
+                          style: TextStyle(
+                            color: Color(0xffea5724),
+                            fontSize: 12.0,
+                          )),
+                      onTap: () {
+                        Navigator.pushNamed(context, 'register');
+                      })),
+              SizedBox(
+                height: 28.0,
+              ),
+            ],
+          ),
         ),
       ),
-    );
-  }
-}
-  Widget backApp(){
-
-    SingleChildScrollView(
-      child: Column(
-        children: <Widget>[],
-      ),
-    );
-    final gradiente = Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            begin: FractionalOffset(0.0, 0.6),
-            end: FractionalOffset(0.0, 1.0),
-            colors: [Colors.white, Color.fromRGBO(200, 200, 200, 1)]),
-      ),
-    );
-
-    final orangeBox = Transform.rotate(
-      angle: -pi / 1.0,
-      child: Container(
-        height: 360.0,
-        width: 360.0,
-        decoration: BoxDecoration(
-            color: Color.fromRGBO(251, 85, 23, 1),
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(120.0),
-                topLeft: Radius.circular(20.0))),
-      ),
-    );
-
-    return Stack(
-      children: <Widget>[gradiente, Positioned(top: -100.0, child: orangeBox)],
     );
   }
 
@@ -217,4 +195,4 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ));
   }
-
+}
