@@ -6,7 +6,6 @@ class HomePage extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-        FocusScope.of(context).requestFocus(FocusNode());
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -69,7 +68,6 @@ class HomePage extends StatelessWidget {
   }
 
   Widget botonNavigationBar(BuildContext context) {
-    // FocusScope.of(context).requestFocus(FocusNode());
     return Theme(
       data: Theme.of(context).copyWith(
 

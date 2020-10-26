@@ -141,13 +141,88 @@ class _LoginPageState extends State<LoginPage> {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('Usuario no existe');
-        return 'Usuario no existe';
+        return AlertDialog(
+            title: Text('Usuario no existe'),
+            content: Container(
+              child: Wrap(
+                children: [
+                  Text(
+                      'Este usuario no existe, intenta probar de nuevo con un Usuario que esté en nuestras bases de datos'),
+                  Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.white,
+                      valueColor: new AlwaysStoppedAnimation<Color>(
+                          Color.fromRGBO(251, 85, 23, 1)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text(
+                  'aceptar',
+                  style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1)),
+                ),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ]);
       } else if (e.code == 'wrong-password') {
         print('Contraseña incorrecta');
-        return 'Contraseña incorrecta';
+        return AlertDialog(
+            title: Text('Contraseña incorrecta'),
+            content: Container(
+              child: Wrap(
+                children: [
+                  Text(
+                      'La contraseña que digitaste es erronea, trata de volver a intentarlo digitando tu contraseña correcta'),
+                  Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.white,
+                      valueColor: new AlwaysStoppedAnimation<Color>(
+                          Color.fromRGBO(251, 85, 23, 1)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text(
+                  'aceptar',
+                  style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1)),
+                ),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ]);
       } else if (e.code == 'invalid-email') {
         print('Correo no valido');
-        return 'Correo no valido';
+        return AlertDialog(
+            title: Text('Correo no valido'),
+            content: Container(
+              child: Wrap(
+                children: [
+                  Text(
+                      'Tu correo esta mal, revisa e intenta digitarlo de nuevo ;D'),
+                  Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.white,
+                      valueColor: new AlwaysStoppedAnimation<Color>(
+                          Color.fromRGBO(251, 85, 23, 1)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text(
+                  'aceptar',
+                  style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1)),
+                ),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ]);
       } else {
         print(e.message);
         return e.message;
@@ -185,24 +260,26 @@ class _LoginPageState extends State<LoginPage> {
                 return AlertDialog(
                     title: Text('En desarrollo'),
                     content: Container(
-                      child: 
-                        Wrap( children:[
+                      child: Wrap(
+                        children: [
                           Text('Proximamente podras ingresar a este rol'),
                           Center(
                             child: CircularProgressIndicator(
-                            backgroundColor: Colors.white,
-                            valueColor: new AlwaysStoppedAnimation<Color>(
-                                Color.fromRGBO(251, 85, 23, 1)),
-                        ),
+                              backgroundColor: Colors.white,
+                              valueColor: new AlwaysStoppedAnimation<Color>(
+                                  Color.fromRGBO(251, 85, 23, 1)),
+                            ),
                           ),
-                          ],
-                          ),
-                        
-                      
+                        ],
+                      ),
                     ),
                     actions: <Widget>[
                       FlatButton(
-                        child: Text('aceptar',style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1)),),
+                        child: Text(
+                          'aceptar',
+                          style:
+                              TextStyle(color: Color.fromRGBO(251, 85, 23, 1)),
+                        ),
                         onPressed: () => Navigator.of(context).pop(),
                       ),
                     ]);
