@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'navigationBar.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -243,17 +244,18 @@ class _LoginPageState extends State<LoginPage> {
 
         if (user['rol'] == 1) {
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (BuildContext context) => HomePage()));
-        } else if (user['rol'] == 2) {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (BuildContext context) => HomePage()));
-        } else if (user['rol'] == 3) {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (BuildContext context) => HomePage()));
-        } else if (user['rol'] == 4) {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (BuildContext context) => HomePage()));
-        } else {
+              MaterialPageRoute(builder: (BuildContext context) => NavigationBar()));
+        } //else if (user['rol'] == 2) {
+        //   Navigator.pushReplacement(context,
+        //       MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+        // } else if (user['rol'] == 3) {
+        //   Navigator.pushReplacement(context,
+        //       MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+        // } else if (user['rol'] == 4) {
+        //   Navigator.pushReplacement(context,
+        //       MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+        // } 
+        else {
           return showDialog(
               context: context,
               builder: (context) {
