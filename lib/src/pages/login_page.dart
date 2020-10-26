@@ -165,9 +165,48 @@ class _LoginPageState extends State<LoginPage> {
           .get()
           .then((value) {
         var user = value.docs[0].data();
+
         if (user['rol'] == 1) {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+        } else if (user['rol'] == 2) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+        } else if (user['rol'] == 3) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+        } else if (user['rol'] == 4) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+        } else {
+          return showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                    title: Text('En desarrollo'),
+                    content: Container(
+                      child: 
+                        Wrap( children:[
+                          Text('Proximamente podras ingresar a este rol'),
+                          Center(
+                            child: CircularProgressIndicator(
+                            backgroundColor: Colors.white,
+                            valueColor: new AlwaysStoppedAnimation<Color>(
+                                Color.fromRGBO(251, 85, 23, 1)),
+                        ),
+                          ),
+                          ],
+                          ),
+                        
+                      
+                    ),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text('aceptar',style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1)),),
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
+                    ]);
+              });
         }
       }));
     } catch (e) {
