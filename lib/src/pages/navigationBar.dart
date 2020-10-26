@@ -22,7 +22,7 @@ class _NavigationBarState extends State<NavigationBar> {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: CurvedNavigationBar(
-          backgroundColor: Color.fromRGBO(251, 85, 23, 1),
+          backgroundColor: Color.fromRGBO(251, 85, 23, .4),
           key: _bottomNavigationKey,
           items: <Widget>[
             Icon(Icons.home, size: 30),
