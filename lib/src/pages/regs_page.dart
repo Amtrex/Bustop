@@ -11,21 +11,13 @@ class RegsPage extends StatelessWidget {
           Center(
           child: Tittles()
           ),
-          formRegs(),
+       
         ],
       ),
     );
   }
 
-  Widget formRegs() {
-    return Expanded(
-      child: Container(
-        child: ListView(
 
-        ),
-      ),
-    );
-  }
 
   
 }

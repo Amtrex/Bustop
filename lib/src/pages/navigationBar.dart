@@ -1,7 +1,5 @@
-import 'dart:math';
 import 'dart:ui';
 import 'package:bustop/src/Widgets/homePageWidgets.dart';
-import 'package:bustop/src/Widgets/styleWidgets.dart';
 import 'package:bustop/src/pages/qrPage.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -38,12 +36,12 @@ class _NavigationBarState extends State<NavigationBar> {
         body: Container(
           color: Color.fromRGBO(251, 85, 23, 1),
           child: Center(
-            child: _choosePage(),
+            child: choosePage(),
           ),
         ));
   }
 
-  Widget _choosePage() {
+   choosePage() {
     if (_page == 0) {
       return HomePage();
     }

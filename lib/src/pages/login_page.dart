@@ -1,3 +1,4 @@
+import 'package:bustop/src/Widgets/homePageWidgets.dart';
 import 'package:bustop/src/Widgets/styleWidgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,9 +12,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
   bool _check = false;
   bool _showPass = true;
-
   double _screenHeightSize;
   final _loginFormKey = GlobalKey<FormState>();
 
@@ -98,6 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text('Ingresar'),
               ),
               onPressed: () {
+                
                 if (_loginFormKey.currentState.validate()) {
                   setState(() {
                     _authFirebase();
@@ -129,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
     var email = emailController.text.trim();
     var pass = passwordController.text.trim();
     try {
-      final user = (await _auth
+      await _auth
           .signInWithEmailAndPassword(
         email: email,
         password: pass,
@@ -138,96 +140,13 @@ class _LoginPageState extends State<LoginPage> {
         get_data(value.user.uid);
       }).catchError((e) {
         print(e);
-      }));
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('Usuario no existe');
-        return AlertDialog(
-            title: Text('Usuario no existe'),
-            content: Container(
-              child: Wrap(
-                children: [
-                  Text(
-                      'Este usuario no existe, intenta probar de nuevo con un Usuario que esté en nuestras bases de datos'),
-                  Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.white,
-                      valueColor: new AlwaysStoppedAnimation<Color>(
-                          Color.fromRGBO(251, 85, 23, 1)),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text(
-                  'aceptar',
-                  style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1)),
-                ),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ]);
       } else if (e.code == 'wrong-password') {
-        print('Contraseña incorrecta');
-        return AlertDialog(
-            title: Text('Contraseña incorrecta'),
-            content: Container(
-              child: Wrap(
-                children: [
-                  Text(
-                      'La contraseña que digitaste es erronea, trata de volver a intentarlo digitando tu contraseña correcta'),
-                  Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.white,
-                      valueColor: new AlwaysStoppedAnimation<Color>(
-                          Color.fromRGBO(251, 85, 23, 1)),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text(
-                  'aceptar',
-                  style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1)),
-                ),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ]);
-      } else if (e.code == 'invalid-email') {
-        print('Correo no valido');
-        return AlertDialog(
-            title: Text('Correo no valido'),
-            content: Container(
-              child: Wrap(
-                children: [
-                  Text(
-                      'Tu correo esta mal, revisa e intenta digitarlo de nuevo ;D'),
-                  Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.white,
-                      valueColor: new AlwaysStoppedAnimation<Color>(
-                          Color.fromRGBO(251, 85, 23, 1)),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text(
-                  'aceptar',
-                  style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1)),
-                ),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ]);
-      } else {
-        print(e.message);
-        return e.message;
-      }
+        print("URIBE PARACO HPTA");
+      } else {}
     } catch (e) {
       print(e);
     }
@@ -243,8 +162,10 @@ class _LoginPageState extends State<LoginPage> {
         var user = value.docs[0].data();
 
         if (user['rol'] == 1) {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (BuildContext context) => NavigationBar()));
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => NavigationBar()));
         } //else if (user['rol'] == 2) {
         //   Navigator.pushReplacement(context,
         //       MaterialPageRoute(builder: (BuildContext context) => HomePage()));
@@ -254,7 +175,7 @@ class _LoginPageState extends State<LoginPage> {
         // } else if (user['rol'] == 4) {
         //   Navigator.pushReplacement(context,
         //       MaterialPageRoute(builder: (BuildContext context) => HomePage()));
-        // } 
+        // }
         else {
           return showDialog(
               context: context,
