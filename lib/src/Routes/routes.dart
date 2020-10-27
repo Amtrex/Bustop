@@ -19,6 +19,8 @@ Map<String, WidgetBuilder> getAplicationRoutes() {
     'scan': (BuildContext context) => ScanPage(),
     'generate': (BuildContext context) => GeneratePage(),
     'regs': (BuildContext context) => RegsPage(),
-    'boton': (BuildContext context) => NavigationBar(),
+    'nav': (BuildContext context) => NavigationBar(),
+
+  
   };
 }

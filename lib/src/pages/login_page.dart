@@ -162,20 +162,14 @@ class _LoginPageState extends State<LoginPage> {
         var user = value.docs[0].data();
 
         if (user['rol'] == 1) {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => NavigationBar()));
-        } //else if (user['rol'] == 2) {
-        //   Navigator.pushReplacement(context,
-        //       MaterialPageRoute(builder: (BuildContext context) => HomePage()));
-        // } else if (user['rol'] == 3) {
-        //   Navigator.pushReplacement(context,
-        //       MaterialPageRoute(builder: (BuildContext context) => HomePage()));
-        // } else if (user['rol'] == 4) {
-        //   Navigator.pushReplacement(context,
-        //       MaterialPageRoute(builder: (BuildContext context) => HomePage()));
-        // }
+          Navigator.pushNamed(context, 'nav', arguments: user['rol']);
+        } else if (user['rol'] == 2) {
+          Navigator.pushNamed(context, 'nav', arguments: user['rol']);
+        } else if (user['rol'] == 3) {
+          Navigator.pushNamed(context, 'nav', arguments: user['rol']);
+        } else if (user['rol'] == 4) {
+          Navigator.pushNamed(context, 'nav', arguments: user['rol']);
+        }
         else {
           return showDialog(
               context: context,

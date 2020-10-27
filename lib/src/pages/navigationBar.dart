@@ -12,6 +12,7 @@ class NavigationBar extends StatefulWidget {
 }
 
 class _NavigationBarState extends State<NavigationBar> {
+  
   //State class
   int _page = 0;
   GlobalKey _bottomNavigationKey = GlobalKey();
@@ -52,10 +53,4 @@ class _NavigationBarState extends State<NavigationBar> {
       return QrPage();
     }
   }
-
-
 }
-
-
-
-
