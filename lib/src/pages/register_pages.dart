@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:math';
 import 'dart:ui';
 import 'package:bustop/src/Widgets/styleWidgets.dart';
@@ -32,12 +33,13 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget registerPage() {
     return Container(
+      padding: EdgeInsets.only(top: 260),
       child: Center(
         child: ListView(
           //  mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 240,
+              height: 140,
             ),
             Container(
               width: 320.0,
@@ -124,22 +126,6 @@ class _RegisterPageState extends State<RegisterPage> {
             Container(
               height: 70,
             ),
-            RaisedButton(
-              elevation: 8.0,
-              shape: StadiumBorder(),
-              color: Color(0xffdc4d1e),
-              child: Padding(
-                child: Text(
-                  'CONTINUAR',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Color(0xffffffff),
-                  ),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: 90.0, vertical: 15.0),
-              ),
-              onPressed: () {},
-            ),
             Divider(color: Colors.transparent),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -156,21 +142,20 @@ class _RegisterPageState extends State<RegisterPage> {
                         fontSize: 12.0,
                       )),
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ScrollPage()),
-                    );
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => ScrollPage()),
+                        ModalRoute.withName("/"));
                   },
                 ),
               ],
+            ),
+            SizedBox(
+              height: 200,
             ),
           ],
         ),
       ),
     );
   }
-
-  
 }
-
-

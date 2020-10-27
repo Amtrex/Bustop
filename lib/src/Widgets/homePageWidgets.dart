@@ -1,40 +1,29 @@
 import 'dart:ui';
-
 import 'package:bustop/src/Widgets/styleWidgets.dart';
 import 'package:flutter/material.dart';
 class CircleBottoms extends StatelessWidget {
-  const CircleBottoms({
-    Key key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Table(
       children: [
         TableRow(children: [
-          CreateCircleBottoms(),
-          CreateCircleBottoms(),
+          createCircleBottoms(Colors.white, Icons.home,'inicio'),
+          createCircleBottoms(Colors.white, Icons.camera,'inicio'),
         ]),
         TableRow(children: [
-          CreateCircleBottoms(),
-          CreateCircleBottoms(),
+          createCircleBottoms(Colors.white, Icons.cancel_schedule_send,'inicio'),
+          createCircleBottoms(Colors.white, Icons.car_repair, 'inicio'),
         ]),
         TableRow(children: [
-          CreateCircleBottoms(),
-          CreateCircleBottoms(),
+          createCircleBottoms(Colors.white, Icons.card_membership,'inicio'),
+          createCircleBottoms(Colors.white, Icons.card_membership,'inicio'),
         ]),
       ],
     );
+    
   }
-}
+  Widget createCircleBottoms( Color color, IconData icon, String){  
 
-class CreateCircleBottoms extends StatelessWidget {
-  const CreateCircleBottoms({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
     return ClipRRect(
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaY: 10, sigmaX: 10),

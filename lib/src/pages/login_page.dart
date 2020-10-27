@@ -12,7 +12,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   bool _check = false;
   bool _showPass = true;
   double _screenHeightSize;
@@ -37,13 +36,15 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget loginPage() {
     return Container(
+      padding: EdgeInsets.only(top: 260),
+      // margin: EdgeInsets.only(bottom: 140),
       child: Form(
         key: _loginFormKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
-              height: 300,
+              height: 100,
             ),
             inputGradient(
                 false, 'Correo', Icon(Icons.person), null, emailController),
@@ -99,7 +100,6 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text('Ingresar'),
               ),
               onPressed: () {
-                
                 if (_loginFormKey.currentState.validate()) {
                   setState(() {
                     _authFirebase();
@@ -115,12 +115,17 @@ class _LoginPageState extends State<LoginPage> {
                 GestureDetector(
                   child: Text("Registrate",
                       style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1))),
+                      
                   onTap: () {
                     Navigator.pushNamed(context, 'register');
                   },
                 )
+                
               ],
-            )
+            ),
+             SizedBox(
+              height: 400,
+            ),
           ],
         ),
       ),
@@ -169,8 +174,7 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.pushNamed(context, 'nav', arguments: user['rol']);
         } else if (user['rol'] == 4) {
           Navigator.pushNamed(context, 'nav', arguments: user['rol']);
-        }
-        else {
+        } else {
           return showDialog(
               context: context,
               builder: (context) {
