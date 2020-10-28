@@ -1,7 +1,10 @@
-import 'dart:ffi';
-import 'dart:math';
-import 'package:bustop/src/pages/scroll_page.dart';
+import 'package:bustop/src/Widgets/homePageWidgets.dart';
+import 'package:bustop/src/Widgets/styleWidgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'home_page.dart';
+import 'navigationBar.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -9,12 +12,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _check = false;
+  bool _showPass = true;
+  double _screenHeightSize;
+  final _loginFormKey = GlobalKey<FormState>();
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
-    
+    _screenHeightSize = MediaQuery.of(context).size.height;
     return Stack(
       children: [
-        backApp(),
+        BackApp(),
         loginPage(),
         Center(
           child: tittles(),
@@ -22,166 +33,231 @@ class _LoginPageState extends State<LoginPage> {
       ],
     );
   }
-  
 
-
-  Widget loginPage(){
-
-    //Para la comprovacion de los datos
-    final formKey = GlobalKey<FormState>();
-    String _correo, _contrasena;
-
+  Widget loginPage() {
     return Container(
-      child: Center(
-        child: Form(
-          key: formKey,
-          child: Column(
+      padding: EdgeInsets.only(top: 260),
+      // margin: EdgeInsets.only(bottom: 140),
+      child: Form(
+        key: _loginFormKey,
+        child: ListView(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+              height: 100,
+            ),
+            inputGradient(
+                false, 'Correo', Icon(Icons.person), null, emailController),
+            Divider(color: Colors.transparent),
+            inputGradient(
+                _showPass,
+                'Contraseña',
+                Icon(Icons.lock),
+                IconButton(
+                    icon: Icon(Icons.visibility),
+                    onPressed: () {
+                      setState(() {
+                        if (_showPass == true) {
+                          _showPass = false;
+                        } else {
+                          _showPass = true;
+                        }
+                      });
+                    }),
+                passwordController),
+            Divider(color: Colors.transparent),
+            Text(
+              '¿Olvidaste el correo o contraseña?',
+              style: TextStyle(color: Colors.grey[400]),
+            ),
+            Divider(color: Colors.transparent),
+            CheckboxListTile(
+              //check Remember me
+              controlAffinity: ListTileControlAffinity.leading,
+              title:
+                  Text('Recuerdame', style: TextStyle(color: Colors.grey[400])),
+              value: _check,
+              activeColor: Colors.orange,
+              onChanged: (valor) {
+                setState(() {
+                  _check = valor;
+                });
+              },
+            ),
+            FlatButton(
+              //button intro
+              textColor: Colors.white,
+              // padding: EdgeInsets.all(0.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30.0),
+                  gradient: LinearGradient(colors: <Color>[
+                    Color.fromRGBO(251, 85, 23, 1),
+                    Color.fromRGBO(255, 138, 82, 1),
+                  ]),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 7.0),
+                child: Text('Ingresar'),
+              ),
+              onPressed: () {
+                if (_loginFormKey.currentState.validate()) {
+                  setState(() {
+                    _authFirebase();
+                  });
+                }
+              },
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children:[
-                
-                 SizedBox(
-                  height: 320.0,
-                ), 
-                Theme(
-                              child: Container(              
-                     width: 320.0,
-                    child:
-                    TextFormField(
-                          maxLength: 20,
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.person),
-                            border: OutlineInputBorder(borderRadius:BorderRadius.circular(30)),
-                              hintText: ('Correo'),
-                            contentPadding: new EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(30)),
-                                borderSide: BorderSide(width: 1,color: Color.fromRGBO(251, 85, 23, 1),),
-                              ),
-                          ),
-                          validator: (input) => !input.contains('control') ? 'Este Usuario no existe, intenta nuevamente' : null,
-                          onSaved: (input) => _correo = input,
-                        ),   
-                  ),
-                   data: Theme.of(context)
-                                      .copyWith(primaryColor: Color.fromRGBO(251, 85, 23, 1),),
-                ),                
-                  SizedBox(
-                  height: 10.0,
-                ),
-                
-                Theme(
-                              child: Container(
-                    width: 320.0,
-                    child: TextFormField(
-                            maxLength: 20,
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.lock_open),
-                              
-                              border: OutlineInputBorder(borderRadius:BorderRadius.circular(30) ),
-                                hintText: ('Contraseña'),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(30)),
-                                borderSide: BorderSide(width: 1,color: Color.fromRGBO(251, 85, 23, 1),),
-                              ),
-                                contentPadding: new EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                            ),
-                            autofocus: true,
-                            validator: (input) => input.length < 8 ? 'Tu contraseña es demasiado corta intenta con otra' : null,
-                            onSaved: (input) => _contrasena = input,
-                            obscureText: true,
-                          ),      
-                  ),
-                  data: Theme.of(context)
-                  .copyWith(primaryColor: Color.fromRGBO(251, 85, 23, 1),),
-                 ),
-                   Container(
-                  child: GestureDetector(
-                    child: Text("¿Tienes problemas con tu usuario o contraseña?"),
-                    onTap:(){Navigator.pushNamed(context, '/');}
-                  )
-                ),
-               Expanded( 
-                 child: Container(), ), 
-                RaisedButton(
-                  elevation: 8.0,
-                  shape: StadiumBorder(),
-                  color: Color(0xffdc4d1e),
-                  child: Padding(
-                    child:Text('INGRESAR', style: TextStyle( color: Colors.white),),
-                    padding: EdgeInsets.symmetric(horizontal:90.0,vertical:15.0),
-                  ),
-
-                  //onPressed: _validar,
-                
-                  
-                  onPressed: (){
-                    Navigator.pushNamed(context, 'home');
+              children: [
+                Text("¿Aun no tienes una cuenta?",
+                    style: TextStyle(color: Colors.grey[400])),
+                GestureDetector(
+                  child: Text("Registrate",
+                      style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1))),
+                      
+                  onTap: () {
+                    Navigator.pushNamed(context, 'register');
                   },
-                ),
-
-                //Funcion submit----------------
-
-                 //Void _validar (){
-                  //if(formKey.currentState.validate()){
-                   //formKey.currentState.save();
-                   //print(_correo);
-                  //print(_contrasena);
-                //}},
-              
+                )
                 
-                  SizedBox(
-                  height: 6.0,
-                ),
-                 Container(
-                  child: GestureDetector(
-                    child: Text("¿Aun no tienes cuenta? ¡Registrate!" , style: TextStyle(color: Color(0xffea5724), fontSize: 12.0, )),
-                    onTap:(){Navigator.pushNamed(context,'register');}
-                  )
-                ),
-                SizedBox(
-                  height: 28.0,
-                ),        
               ],
             ),
-
+             SizedBox(
+              height: 400,
+            ),
+          ],
         ),
       ),
     );
   }
-}
-  Widget backApp(){
 
-    SingleChildScrollView(
-      child: Column(
-        children: <Widget>[],
-      ),
-    );
-    final gradiente = Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            begin: FractionalOffset(0.0, 0.6),
-            end: FractionalOffset(0.0, 1.0),
-            colors: [Colors.white, Color.fromRGBO(200, 200, 200, 1)]),
-      ),
-    );
+  Future _authFirebase() async {
+    var email = emailController.text.trim();
+    var pass = passwordController.text.trim();
+    try {
+      await _auth
+          .signInWithEmailAndPassword(
+        email: email,
+        password: pass,
+      )
+          .then((value) {
+        get_data(value.user.uid);
+      }).catchError((e) {
+        print(e);
+      });
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('Usuario no existe');
+      } else if (e.code == 'wrong-password') {
+        print("URIBE PARACO HPTA");
+      } else {}
+    } catch (e) {
+      print(e);
+    }
+  }
 
-    final orangeBox = Transform.rotate(
-      angle: -pi / 1.0,
+  Future get_data(user_id) async {
+    try {
+      var usuario = (await FirebaseFirestore.instance
+          .collection('tblUsuarios')
+          .where("idUsuario == '" + user_id + "'")
+          .get()
+          .then((value) {
+        var user = value.docs[0].data();
+
+        if (user['rol'] == 1) {
+          Navigator.pushNamed(context, 'nav', arguments: user['rol']);
+        } else if (user['rol'] == 2) {
+          Navigator.pushNamed(context, 'nav', arguments: user['rol']);
+        } else if (user['rol'] == 3) {
+          Navigator.pushNamed(context, 'nav', arguments: user['rol']);
+        } else if (user['rol'] == 4) {
+          Navigator.pushNamed(context, 'nav', arguments: user['rol']);
+        } else {
+          return showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                    title: Text('En desarrollo'),
+                    content: Container(
+                      child: Wrap(
+                        children: [
+                          Text('Proximamente podras ingresar a este rol'),
+                          Center(
+                            child: CircularProgressIndicator(
+                              backgroundColor: Colors.white,
+                              valueColor: new AlwaysStoppedAnimation<Color>(
+                                  Color.fromRGBO(251, 85, 23, 1)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(
+                          'aceptar',
+                          style:
+                              TextStyle(color: Color.fromRGBO(251, 85, 23, 1)),
+                        ),
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
+                    ]);
+              });
+        }
+      }));
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Widget inputGradient(
+      _showPass, String title, Widget pfx, Widget sfx, final ctr) {
+    return Material(
+      elevation: 8,
+      shadowColor: Colors.grey[200],
+      borderRadius: BorderRadius.circular(40.0),
       child: Container(
-        height: 360.0,
-        width: 360.0,
         decoration: BoxDecoration(
-            color: Color.fromRGBO(251, 85, 23, 1),
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(120.0),
-                topLeft: Radius.circular(20.0))),
+          border: Border.all(
+            width: 3,
+            color: Colors.transparent,
+          ),
+          borderRadius: BorderRadius.circular(30.0),
+          gradient: LinearGradient(
+            colors: [
+              Color.fromRGBO(251, 85, 23, 1),
+              Color.fromRGBO(255, 138, 82, 1),
+            ],
+          ),
+        ),
+        child: TextFormField(
+          //User field
+          obscureText: _showPass,
+          controller: ctr,
+          validator: (value) {
+            if (value.isEmpty) {
+              return 'Por favor digiligencie este campo';
+            }
+          },
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.zero,
+            filled: true,
+            fillColor: Colors.white,
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(40.0),
+                borderSide: BorderSide.none),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(40.0),
+              borderSide: BorderSide.none,
+            ),
+            hintText: title,
+            prefixIcon: pfx,
+            suffixIcon: sfx,
+          ),
+        ),
       ),
-    );
-
-    return Stack(
-      children: <Widget>[gradiente, Positioned(top: -100.0, child: orangeBox)],
     );
   }
 
@@ -217,4 +293,4 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ));
   }
-
+}

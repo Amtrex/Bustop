@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
-
-import 'package:bustop/src/pages/login_page.dart';
+import 'package:bustop/src/pages/qrPage.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -35,13 +35,13 @@ class HomePage extends StatelessWidget {
     );
 
     final orangeBox = Transform.rotate(
-      angle: -pi / 4.0,
+      angle: -pi / 1.0,
       child: Container(
-        height: 350.0,
-        width: 300.0,
+        height: 500.0,
+        width: 400.0,
         decoration: BoxDecoration(
             color: Color.fromRGBO(251, 85, 23, 1),
-            borderRadius: BorderRadius.circular(60.0)),
+            borderRadius: BorderRadius.circular(10.0)),
       ),
     );
 
@@ -71,56 +71,59 @@ class HomePage extends StatelessWidget {
   Widget botonNavigationBar(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-
-        canvasColor: Colors.white60,
-        primaryColor: Color.fromRGBO(251, 85, 23, 1),
-        textTheme: Theme.of(context).textTheme.copyWith(caption:TextStyle(color: Color.fromRGBO(169, 169, 168, 0.9)))
-
-      ) ,
-      child: BottomNavigationBar(
-          onTap: (tabIndex) {
+          canvasColor: Colors.white60,
+          primaryColor: Color.fromRGBO(251, 85, 23, 1),
+          textTheme: Theme.of(context).textTheme.copyWith(
+              caption: TextStyle(color: Color.fromRGBO(169, 169, 168, 0.9)))),
+      child: CurvedNavigationBar(
+        backgroundColor: Color.fromRGBO(251, 85, 23, 1),
+        items: <Widget>[
+          Icon(Icons.home, size: 30),
+          Icon(Icons.map, size: 30),
+          Icon(Icons.code, size: 30),
+        ],
+        onTap: (tabIndex) {
+          switch (tabIndex) {
+            case 0:
+              print(tabIndex);
+              break;
+            case 1:
             print(tabIndex);
-            if (tabIndex == 0) {
-              Navigator.of(context).pushNamed(
-                'home',
-              );
-            }
-            
-            if (tabIndex == 2) {
-              Navigator.of(context).pushNamed(
-                'qr',
-              );
-            }
-          },
-          unselectedItemColor: Color.fromRGBO(150, 139, 139, .9),
-          selectedItemColor: Color.fromRGBO(251, 85, 23, 1),
-          showUnselectedLabels: true,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Color.fromRGBO(251, 85, 23, 1),
-              ),
-              title: Text('Inicio'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.map,
-                color:Color.fromRGBO(150, 139, 139, .9),
-              ),
-              title: Text('Mapa'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.code,
-                color: Color.fromRGBO(150, 139, 139, .9),
-              ),
-              title: Text('QR'),
-            ),
+              break;
+            case 2:
+            print(tabIndex);
+              break;
+            default:
+          }
+        },
+        // unselectedItemColor: Color.fromRGBO(150, 139, 139, .9),
+        // selectedItemColor: Color.fromRGBO(251, 85, 23, 1),
+        // showUnselectedLabels: true,
+        // items: [
+        //   BottomNavigationBarItem(
+        //     icon: Icon(
+        //       Icons.home,
+        //       color: Color.fromRGBO(251, 85, 23, 1),
+        //     ),
+        //     title: Text('Inicio'),
+        //   ),
+        //   BottomNavigationBarItem(
+        //     icon: Icon(
+        //       Icons.map,
+        //       color:Color.fromRGBO(150, 139, 139, .9),
+        //     ),
+        //     title: Text('Mapa'),
+        //   ),
+        //   BottomNavigationBarItem(
+        //     icon: Icon(
+        //       Icons.code,
+        //       color: Color.fromRGBO(150, 139, 139, .9),
+        //     ),
+        //     title: Text('QR'),
+        //   ),
 
-          ],
-        ),
-
+        // ],
+      ),
     );
   }
 
@@ -142,7 +145,6 @@ class HomePage extends StatelessWidget {
       ],
     );
   }
-
 
   Widget createCircleBottom() {
     return ClipRRect(
@@ -179,7 +181,6 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-
       ),
     );
   }

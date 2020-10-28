@@ -1,5 +1,7 @@
 import 'package:bustop/src/pages/generate.dart';
+import 'package:bustop/src/pages/home_page.dart';
 import 'package:bustop/src/pages/scan.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 //import 'package:qrcode/generate.dart';
 //import 'package:qrcode/scan.dart';
@@ -15,11 +17,17 @@ class _HomePageState extends State<QrPage> {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
-        backgroundColor: Color(0xffdc4d1e),
+        backgroundColor: Color.fromRGBO(251, 85, 23, 1),
         title: Text("CODGIO QR"),
         centerTitle: true,
       ),
       body: Container(
+        decoration: BoxDecoration(
+        gradient: LinearGradient(
+            begin: FractionalOffset(0.0, 0.6),
+            end: FractionalOffset(0.0, 1.0),
+            colors: [Colors.white, Color.fromRGBO(200, 200, 200, 1)]),
+      ),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.all(20.0),
@@ -27,70 +35,24 @@ class _HomePageState extends State<QrPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Image(image: AssetImage('assets/Qricon.png'),
-            height: 300,
-            width: 120, ),
+            Image(
+              image: AssetImage('assets/Qricon.png'),
+              height: 300,
+              width: 120,
+            ),
             flatButton("Scanear codigo QR", ScanPage()),
-            SizedBox(height: 20.0,),
+            SizedBox(
+              height: 20.0,
+            ),
             flatButton("Crear codigo QR", GeneratePage()),
           ],
         ),
       ),
-
-      bottomNavigationBar: BottomNavigationBar(
-          onTap: (tabIndex) {
-            print(tabIndex);
-            if (tabIndex == 0) {
-              Navigator.of(context).pushNamed(
-                'home',
-              );
-            }
-            
-            if (tabIndex == 2) {
-              Navigator.of(context).pushNamed(
-                '',
-              );
-            }
-            if (tabIndex == 2) {
-              Navigator.of(context).pushNamed(
-                'qr',
-              );
-            }
-          },
-          unselectedItemColor: Color.fromRGBO(150, 139, 139, .9),
-          selectedItemColor: Color.fromRGBO(150, 139, 139, .9),
-          showUnselectedLabels: true,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color:Color.fromRGBO(150, 139, 139, .9),
-              ),
-              title: Text('Inicio'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.map,
-                color:Color.fromRGBO(150, 139, 139, .9),
-              ),
-              title: Text('Mapa'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.code,
-                color: Color.fromRGBO(251, 85, 23, 1),
-              ),
-              title: Text('QR', style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1)),),
-            ),
-
-          ],
-        ),
     );
   }
 
   Widget flatButton(String text, Widget widget) {
     return FlatButton(
-      
       padding: EdgeInsets.all(15.0),
       onPressed: () async {
         Navigator.of(context)
@@ -98,11 +60,11 @@ class _HomePageState extends State<QrPage> {
       },
       child: Text(
         text,
-        style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1),fontWeight: FontWeight.bold),
+        style: TextStyle(
+            color: Color.fromRGBO(251, 85, 23, 1), fontWeight: FontWeight.bold),
       ),
-
       shape: RoundedRectangleBorder(
-          side: BorderSide(color: Color.fromRGBO(251, 85, 23, 1),width: 3.0),
+          side: BorderSide(color: Color.fromRGBO(251, 85, 23, 1), width: 3.0),
           borderRadius: BorderRadius.circular(20.0)),
     );
   }
