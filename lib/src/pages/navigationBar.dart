@@ -21,12 +21,12 @@ class _NavigationBarState extends State<NavigationBar> {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: CurvedNavigationBar(
-          backgroundColor: Color.fromRGBO(251, 85, 23, .4),
+          backgroundColor: Color.fromRGBO(251, 85, 23, 1),
           key: _bottomNavigationKey,
           items: <Widget>[
             Icon(Icons.home, size: 30),
             Icon(Icons.map, size: 30),
-            Icon(Icons.code, size: 30),
+            Icon(Icons.qr_code, size: 30),
           ],
           onTap: (index) {
             setState(() {
@@ -44,7 +44,7 @@ class _NavigationBarState extends State<NavigationBar> {
 
    choosePage() {
     if (_page == 0) {
-      return HomePage();
+      return HomePagee();
     }
     if (_page == 1) {
       return AlertsDialog();

@@ -12,7 +12,6 @@ import 'package:bustop/src/pages/scroll_page.dart';
 Map<String, WidgetBuilder> getAplicationRoutes() {
   return <String, WidgetBuilder>{
     '/': (BuildContext context) => ScrollPage(),
-    'home': (BuildContext context) => HomePage(),
     'register': (BuildContext context) => RegisterPage(),
     'login': (BuildContext context) => LoginPage(),
     'qr': (BuildContext context) => QrPage(),

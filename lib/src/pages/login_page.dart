@@ -150,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
       if (e.code == 'user-not-found') {
         print('Usuario no existe');
       } else if (e.code == 'wrong-password') {
-        print("URIBE PARACO HPTA");
+        print("Contraseña incorrecta");
       } else {}
     } catch (e) {
       print(e);
@@ -166,13 +166,7 @@ class _LoginPageState extends State<LoginPage> {
           .then((value) {
         var user = value.docs[0].data();
 
-        if (user['rol'] == 1) {
-          Navigator.pushNamed(context, 'nav', arguments: user['rol']);
-        } else if (user['rol'] == 2) {
-          Navigator.pushNamed(context, 'nav', arguments: user['rol']);
-        } else if (user['rol'] == 3) {
-          Navigator.pushNamed(context, 'nav', arguments: user['rol']);
-        } else if (user['rol'] == 4) {
+        if (user['rol'] <= 4) {
           Navigator.pushNamed(context, 'nav', arguments: user['rol']);
         } else {
           return showDialog(
