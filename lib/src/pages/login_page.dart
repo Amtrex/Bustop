@@ -1,10 +1,7 @@
-import 'package:bustop/src/Widgets/homePageWidgets.dart';
 import 'package:bustop/src/Widgets/styleWidgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'home_page.dart';
-import 'navigationBar.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,6 +9,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool isLoaging = false;
   bool _check = false;
   bool _showPass = true;
   double _screenHeightSize;
@@ -100,6 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text('Ingresar'),
               ),
               onPressed: () {
+                isLoaging  = true;
                 if (_loginFormKey.currentState.validate()) {
                   setState(() {
                     _authFirebase();

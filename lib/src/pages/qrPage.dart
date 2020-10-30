@@ -1,7 +1,5 @@
 import 'package:bustop/src/pages/generate.dart';
-import 'package:bustop/src/pages/home_page.dart';
 import 'package:bustop/src/pages/scan.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 //import 'package:qrcode/generate.dart';
 //import 'package:qrcode/scan.dart';
