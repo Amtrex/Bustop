@@ -115,15 +115,13 @@ class _LoginPageState extends State<LoginPage> {
                 GestureDetector(
                   child: Text("Registrate",
                       style: TextStyle(color: Color.fromRGBO(251, 85, 23, 1))),
-                      
                   onTap: () {
                     Navigator.pushNamed(context, 'register');
                   },
                 )
-                
               ],
             ),
-             SizedBox(
+            SizedBox(
               height: 400,
             ),
           ],

@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:bustop/src/Widgets/homePageWidgets.dart';
+import 'package:bustop/src/pages/maps_page.dart';
 import 'package:bustop/src/pages/qrPage.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,6 @@ class NavigationBar extends StatefulWidget {
 }
 
 class _NavigationBarState extends State<NavigationBar> {
-  
   //State class
   int _page = 0;
   GlobalKey _bottomNavigationKey = GlobalKey();
@@ -42,12 +42,12 @@ class _NavigationBarState extends State<NavigationBar> {
         ));
   }
 
-   choosePage() {
+  choosePage() {
     if (_page == 0) {
       return HomePage();
     }
     if (_page == 1) {
-      return AlertsDialog();
+      return MapsPage();
     }
     if (_page == 2) {
       return QrPage();

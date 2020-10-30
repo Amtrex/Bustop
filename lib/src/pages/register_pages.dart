@@ -1,8 +1,5 @@
-import 'dart:ffi';
-import 'dart:math';
 import 'dart:ui';
 import 'package:bustop/src/Widgets/styleWidgets.dart';
-import 'package:bustop/src/pages/regs_page.dart';
 import 'package:bustop/src/pages/scroll_page.dart';
 import 'package:flutter/material.dart';
 

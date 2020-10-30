@@ -1,10 +1,6 @@
 import 'package:bustop/src/pages/generate.dart';
-import 'package:bustop/src/pages/home_page.dart';
 import 'package:bustop/src/pages/scan.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-//import 'package:qrcode/generate.dart';
-//import 'package:qrcode/scan.dart';
 
 class QrPage extends StatefulWidget {
   @override
@@ -23,11 +19,11 @@ class _HomePageState extends State<QrPage> {
       ),
       body: Container(
         decoration: BoxDecoration(
-        gradient: LinearGradient(
-            begin: FractionalOffset(0.0, 0.6),
-            end: FractionalOffset(0.0, 1.0),
-            colors: [Colors.white, Color.fromRGBO(200, 200, 200, 1)]),
-      ),
+          gradient: LinearGradient(
+              begin: FractionalOffset(0.0, 0.6),
+              end: FractionalOffset(0.0, 1.0),
+              colors: [Colors.white, Color.fromRGBO(200, 200, 200, 1)]),
+        ),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.all(20.0),
