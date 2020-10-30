@@ -1,10 +1,7 @@
-import 'package:bustop/src/Widgets/homePageWidgets.dart';
 import 'package:bustop/src/Widgets/styleWidgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'home_page.dart';
-import 'navigationBar.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -12,6 +9,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool isLoaging = false;
   bool _check = false;
   bool _showPass = true;
   double _screenHeightSize;
@@ -100,6 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text('Ingresar'),
               ),
               onPressed: () {
+                isLoaging  = true;
                 if (_loginFormKey.currentState.validate()) {
                   setState(() {
                     _authFirebase();
@@ -148,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
       if (e.code == 'user-not-found') {
         print('Usuario no existe');
       } else if (e.code == 'wrong-password') {
-        print("URIBE PARACO HPTA");
+        print("Contraseña incorrecta");
       } else {}
     } catch (e) {
       print(e);
@@ -164,13 +163,7 @@ class _LoginPageState extends State<LoginPage> {
           .then((value) {
         var user = value.docs[0].data();
 
-        if (user['rol'] == 1) {
-          Navigator.pushNamed(context, 'nav', arguments: user['rol']);
-        } else if (user['rol'] == 2) {
-          Navigator.pushNamed(context, 'nav', arguments: user['rol']);
-        } else if (user['rol'] == 3) {
-          Navigator.pushNamed(context, 'nav', arguments: user['rol']);
-        } else if (user['rol'] == 4) {
+        if (user['rol'] <= 4) {
           Navigator.pushNamed(context, 'nav', arguments: user['rol']);
         } else {
           return showDialog(
