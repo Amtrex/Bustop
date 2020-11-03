@@ -26,9 +26,9 @@ class _MapsPageState extends State<MapsPage> {
   }
 
   void initState() {
-    // Future.delayed(Duration.zero, () {
-    //   _listenLocation();
-    // });
+    Future.delayed(Duration.zero, () {
+      _listenLocation();
+    });
     super.initState();
   }
 
@@ -40,6 +40,7 @@ class _MapsPageState extends State<MapsPage> {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Color.fromRGBO(251, 85, 23, 1),
         title: Text("Geolocalización"),
         centerTitle: true,

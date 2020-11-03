@@ -163,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
           .then((value) {
         var user = value.docs[0].data();
 
-        if (user['rol'] <= 4) {
+        if (user['rol'] == 1 ||user['rol'] == 2 ||user['rol'] == 3 ||user['rol'] == 4) {
           Navigator.pushNamed(context, 'nav', arguments: user['rol']);
         } else {
           return showDialog(
