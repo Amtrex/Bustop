@@ -35,7 +35,7 @@ class _MapsPageState extends State<MapsPage> {
   @override
   Widget build(BuildContext context) {
     if (origen == null || origen == '') {
-      Future.delayed(Duration.zero, () => _listenLocation());
+      Future.delayed(Duration.zero, () => _listenMyLocation());
     }
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -74,7 +74,7 @@ class _MapsPageState extends State<MapsPage> {
     );
   }
 
-  Future<void> _listenLocation() async {
+  Future<void> _listenMyLocation() async {
     location.onLocationChanged.listen((LocationData currentLocation) {
       setState(() {
         origen = LatLng(currentLocation.latitude, currentLocation.longitude);
@@ -89,6 +89,9 @@ class _MapsPageState extends State<MapsPage> {
         );
       });
     });
+  }
+
+  Future<void> _AddMarks() async{
   }
 
   Future<void> _updateCamera(lat, lng) async {
