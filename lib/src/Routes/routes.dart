@@ -1,3 +1,4 @@
+import 'package:bustop/src/Widgets/splash_screen.dart';
 import 'package:bustop/src/pages/bus_page.dart';
 import 'package:bustop/src/pages/cityRoutes_page.dart';
 import 'package:bustop/src/pages/generate.dart';
@@ -13,6 +14,7 @@ import 'package:bustop/src/pages/transport_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bustop/src/pages/login_page.dart';
 import 'package:bustop/src/pages/scroll_page.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 Map<String, WidgetBuilder> getAplicationRoutes() {
   return <String, WidgetBuilder>{

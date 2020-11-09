@@ -1,3 +1,4 @@
+import 'package:bustop/src/Widgets/alerts_widgets.dart';
 import 'package:bustop/src/Widgets/styleWidgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -141,14 +142,35 @@ class _LoginPageState extends State<LoginPage> {
           .then((value) {
         get_data(value.user.uid);
       }).catchError((e) {
-        print(e);
+        if (e.code == 'user-not-found') {
+          return showDialog(
+            context: context,
+            builder: (context) => AlertDialogWidget(
+                tittle: 'Usuario no encontrado',
+                desc:
+                    'El usuario no se encuentra registrado en la base de datos.'),
+          );
+        } else if (e.code == 'wrong-password') {
+          return showDialog(
+            context: context,
+            builder: (context) => AlertDialogWidget(
+                tittle: 'Contraseña incorrecta',
+                desc:
+                    'La contraseña que digitaste es erronea, intenta digitarla nuevaente.'),
+          );
+        } else if (e.code == 'invalid-email') {
+          return showDialog(
+            context: context,
+            builder: (context) => AlertDialogWidget(
+                tittle: 'Correo incorrecto',
+                desc:
+                    'El correo que digitaste es erroneo, intenta digitarlo nuevaente.'),
+          );
+        } else {
+          print(e.message);
+          return e.message;
+        }
       });
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('Usuario no existe');
-      } else if (e.code == 'wrong-password') {
-        print("Contraseña incorrecta");
-      } else {}
     } catch (e) {
       print(e);
     }

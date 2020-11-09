@@ -36,7 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
           //  mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 140,
+              height: 50,
             ),
             Container(
               width: 320.0,
@@ -121,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
               onPressed: () {},
             ),
             Container(
-              height: 70,
+              height: 30,
             ),
             Divider(color: Colors.transparent),
             Row(
