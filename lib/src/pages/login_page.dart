@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text('Ingresar'),
               ),
               onPressed: () {
-                isLoaging  = true;
+                isLoaging = true;
                 if (_loginFormKey.currentState.validate()) {
                   setState(() {
                     _authFirebase();
@@ -141,6 +141,7 @@ class _LoginPageState extends State<LoginPage> {
           .then((value) {
         get_data(value.user.uid);
       }).catchError((e) {
+        print('ERROR');
         print(e);
       });
     } on FirebaseAuthException catch (e) {
@@ -163,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
           .then((value) {
         var user = value.docs[0].data();
 
-        if (user['rol'] <= 4) {
+        if (user['rol'] != 'administrador') {
           Navigator.pushNamed(context, 'nav', arguments: user['rol']);
         } else {
           return showDialog(
