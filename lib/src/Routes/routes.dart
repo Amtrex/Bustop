@@ -32,6 +32,7 @@ Map<String, WidgetBuilder> getAplicationRoutes() {
     'pointControlPage' : (BuildContext context) => PointControllerPage(),
     'cityRoutesPage' : (BuildContext context) => CityRoutesPage(),
     'transportPage' : (BuildContext context) => TransportPage(),
+    'splash': (BuildContext context) => SplashBustop(),
   
   };
 }

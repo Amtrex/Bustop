@@ -3,6 +3,7 @@ import 'package:bustop/src/Widgets/styleWidgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:meta/dart2js.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -20,6 +21,8 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
+  final size = 200.0;
+
   Widget build(BuildContext context) {
     _screenHeightSize = MediaQuery.of(context).size.height;
     return Stack(
@@ -34,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget loginPage() {
+    const TWO_PI = 3.14 * 2;
     return Container(
       padding: EdgeInsets.only(top: 260),
       // margin: EdgeInsets.only(bottom: 140),
@@ -99,10 +103,82 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text('Ingresar'),
               ),
               onPressed: () {
-                isLoaging  = true;
+                isLoaging = true;
                 if (_loginFormKey.currentState.validate()) {
                   setState(() {
                     _authFirebase();
+                    return showDialog(
+                      context: context,
+                      builder: (context) {
+                        return Center(
+                          child: TweenAnimationBuilder(
+                            tween: Tween(begin: 0.0, end: 1.0),
+                            duration: Duration(seconds: 4),
+                            builder: (context, value, child) {
+                              int percentage = (value * 100).ceil();
+                              return Container(
+                                width: size,
+                                height: size,
+                                child: Stack(
+                                  children: [
+                                    ShaderMask(
+                                      shaderCallback: (rect) {
+                                        return SweepGradient(
+                                            startAngle: 0.0,
+                                            endAngle: TWO_PI,
+                                            stops: [value, value],
+                                            // 0.0 , 0.5 , 0.5 , 1.0
+                                            center: Alignment.center,
+                                            colors: [
+                                              Colors.white,
+                                              Colors.transparent.withAlpha(55)
+                                            ]).createShader(rect);
+                                      },
+                                      child: Container(
+                                        width: size,
+                                        height: size,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                                image: AssetImage(
+                                                    "assets/IconBustop.png"))),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Container(
+                                        width: size - 40,
+                                        height: size - 40,
+                                        // decoration: BoxDecoration(
+                                        //     color: Colors.white,
+                                        //     shape: BoxShape.circle
+                                        // ),
+                                        child: Center(
+                                            child: Column(
+                                          // mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            SizedBox(
+                                              height: 125,
+                                            ),
+                                            Text(
+                                              "$percentage" + "%",
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white,
+                                                decoration: TextDecoration.none,
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    );
                   });
                 }
               },
@@ -183,42 +259,49 @@ class _LoginPageState extends State<LoginPage> {
           .where("idUsuario == '" + user_id + "'")
           .get()
           .then((value) {
-        var user = value.docs[0].data();
-
-        if (user['rol'] == 1 ||user['rol'] == 2 ||user['rol'] == 3 ||user['rol'] == 4) {
-          Navigator.pushNamed(context, 'nav', arguments: user['rol']);
-        } else {
-          return showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                    title: Text('En desarrollo'),
-                    content: Container(
-                      child: Wrap(
-                        children: [
-                          Text('Proximamente podras ingresar a este rol'),
-                          Center(
-                            child: CircularProgressIndicator(
-                              backgroundColor: Colors.white,
-                              valueColor: new AlwaysStoppedAnimation<Color>(
-                                  Color.fromRGBO(251, 85, 23, 1)),
+        value.docs.forEach((element) {
+          if (element['idUsuario'] == user_id) {
+          if (element['rol'] == 1 ||
+              element['rol'] == 2 ||
+              element['rol'] == 3 ||
+              element['rol'] == 4) {
+            Navigator.of(context).pop();
+            Navigator.pushNamed(context, 'nav', arguments: element['rol']);
+          } else {
+            Navigator.of(context).pop();
+            return showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                      title: Text('En desarrollo'),
+                      content: Container(
+                        child: Wrap(
+                          children: [
+                            Text('Proximamente podras ingresar a este rol'),
+                            Center(
+                              child: CircularProgressIndicator(
+                                backgroundColor: Colors.white,
+                                valueColor: new AlwaysStoppedAnimation<Color>(
+                                    Color.fromRGBO(251, 85, 23, 1)),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    actions: <Widget>[
-                      FlatButton(
-                        child: Text(
-                          'aceptar',
-                          style:
-                              TextStyle(color: Color.fromRGBO(251, 85, 23, 1)),
+                          ],
                         ),
-                        onPressed: () => Navigator.of(context).pop(),
                       ),
-                    ]);
-              });
-        }
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text(
+                            'aceptar',
+                            style: TextStyle(
+                                color: Color.fromRGBO(251, 85, 23, 1)),
+                          ),
+                          onPressed: () => Navigator.of(context).pop(),
+                        ),
+                      ]);
+                });
+          }
+          }
+        });
       }));
     } catch (e) {
       print(e);
