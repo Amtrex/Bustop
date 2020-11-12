@@ -253,6 +253,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future get_data(user_id) async {
+    var roles;
     try {
       var usuario = (await FirebaseFirestore.instance
           .collection('tblUsuarios')

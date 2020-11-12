@@ -32,3 +32,29 @@ class AlertDialogWidget extends StatelessWidget {
         ]);
   }
 }
+class AlertsDialog extends StatelessWidget {
+  const AlertsDialog({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+  return AlertDialog(
+        title: Text('EN DESARROLLO'),
+        content: Container(
+          child: Wrap(
+            children: [
+              Text('Esta vista se encuentra en desarrollo'),
+              Center(
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.white,
+                  valueColor: new AlwaysStoppedAnimation<Color>(
+                      Color.fromRGBO(251, 85, 23, 1)),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+}
+}
