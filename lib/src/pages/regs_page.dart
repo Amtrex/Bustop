@@ -355,7 +355,7 @@ var _select;
     // Call the user's CollectionReference to add a new user
     return users.add({
       'user_id': userId,
-      'name': _name != '' || _name != null ? _name : '', // John Doe
+      'name': _name != '' || _name != null ? _name : '',
       'lastname':
           lastnameController.text != '' || lastnameController.text != null
               ? _lastName

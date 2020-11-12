@@ -2,6 +2,7 @@ import 'package:bustop/src/Widgets/splash_screen.dart';
 import 'package:bustop/src/pages/bus_page.dart';
 import 'package:bustop/src/pages/cityRoutes_page.dart';
 import 'package:bustop/src/pages/generate.dart';
+import 'package:bustop/src/pages/home_page.dart';
 import 'package:bustop/src/pages/navigationBar.dart';
 import 'package:bustop/src/pages/pointController_page.dart';
 import 'package:bustop/src/pages/qrPage.dart';
@@ -33,6 +34,7 @@ Map<String, WidgetBuilder> getAplicationRoutes() {
     'cityRoutesPage' : (BuildContext context) => CityRoutesPage(),
     'transportPage' : (BuildContext context) => TransportPage(),
     'splash': (BuildContext context) => SplashBustop(),
+    'home':(BuildContext context) => HomePage(),
   
   };
 }

@@ -253,6 +253,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future get_data(user_id) async {
+    var roles ;
     try {
       var usuario = (await FirebaseFirestore.instance
           .collection('tblUsuarios')
@@ -261,12 +262,13 @@ class _LoginPageState extends State<LoginPage> {
           .then((value) {
         value.docs.forEach((element) {
           if (element['idUsuario'] == user_id) {
-          if (element['rol'] == 1 ||
-              element['rol'] == 2 ||
-              element['rol'] == 3 ||
-              element['rol'] == 4) {
+          if (element['rol'] == 'administrador' ||
+              element['rol'] == 'control' ||
+              element['rol'] == 'conductor' ||
+              element['rol'] == 'usuario') {
+                roles = element['rol'];
             Navigator.of(context).pop();
-            Navigator.pushNamed(context, 'nav', arguments: element['rol']);
+            Navigator.pushNamed(context, 'nav', arguments: roles);
           } else {
             Navigator.of(context).pop();
             return showDialog(
