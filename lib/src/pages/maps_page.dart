@@ -37,6 +37,7 @@ class _MapsPageState extends State<MapsPage> {
     // Future.delayed(Duration.zero, () {
     //   getData(auth.currentUser.uid);
     // });
+    positionsUsers();
     super.initState();
   }
 
@@ -53,6 +54,7 @@ class _MapsPageState extends State<MapsPage> {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Color.fromRGBO(251, 85, 23, 1),
         title: Text("Mapa"),
         centerTitle: true,
@@ -87,11 +89,11 @@ class _MapsPageState extends State<MapsPage> {
     );
   }
 
-  Future _listenMyLocation(rol, userId) {
+  _listenMyLocation(rol, userId) {
     var initial = 0;
+    _markers.clear();
     location.onLocationChanged.listen((LocationData currentLocation) {
       setState(() {
-        _markers.clear();
         if (initial == 0) {
           _updateCamera(currentLocation.latitude, currentLocation.longitude);
           FirebaseDatabase.instance
@@ -103,17 +105,17 @@ class _MapsPageState extends State<MapsPage> {
             'longitude': currentLocation.longitude,
             'rol': rol
           });
+          _markers.add(
+            Marker(
+              markerId: MarkerId('myLocation'),
+              position:
+                  LatLng(currentLocation.latitude, currentLocation.longitude),
+              infoWindow: InfoWindow(title: 'location', snippet: 'welcome'),
+              icon: pinLocationIcon,
+            ),
+          );
         }
         origen = LatLng(currentLocation.latitude, currentLocation.longitude);
-        FirebaseDatabase.instance
-            .reference()
-            .child('location')
-            .child(userId)
-            .update({
-          'latitude': currentLocation.latitude,
-          'longitude': currentLocation.longitude,
-          'rol': rol
-        });
         _markers.add(
           Marker(
             markerId: MarkerId('myLocation'),
@@ -123,39 +125,55 @@ class _MapsPageState extends State<MapsPage> {
             icon: pinLocationIcon,
           ),
         );
+        FirebaseDatabase.instance
+            .reference()
+            .child('location')
+            .child(userId)
+            .update({
+          'latitude': currentLocation.latitude,
+          'longitude': currentLocation.longitude,
+          'rol': rol
+        });
         initial++;
       });
     });
   }
 
-  // var latitude;
-  // var longitude;
-  // var role;
-  // _firebaseRef.once().then(
-  //   (DataSnapshot snapshot) {
-  //     setState(() {
-  //       Map<dynamic, dynamic> map = snapshot.value;
-  //       for (var i = 0; i < map.length; i++) {
-  //         latitude = map.values.toList()[i]["latitude"];
-  //         longitude = map.values.toList()[i]["longitude"];
-  //         role = map.values.toList()[i]["rol"];
-  //         if (rol == 'usuario' || rol == 'control') {
-  //           if (role == 'conductor') {
-  //             _markers.add(
-  //               Marker(
-  //                 markerId: MarkerId('newLocation' + i.toString()),
-  //                 position: LatLng(latitude, longitude),
-  //                 infoWindow:
-  //                     InfoWindow(title: 'location', snippet: 'welcome'),
-  //                 icon: markLocationBus,
-  //               ),
-  //             );
-  //           }
-  //         }
-  //       }
-  //     });
-  //   },
-  // );
+  positionsUsers() async {
+    markLocationBus = (await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 2.5), 'assets/bus.png'));
+    _firebaseRef.onValue.listen((event) {
+      // _markers.clear();
+      var latitude;
+      var longitude;
+      var role;
+      var snapshot = event.snapshot;
+      setState(() {
+        Map<dynamic, dynamic> map = snapshot.value;
+        for (var i = 0; i < map.length; i++) {
+          latitude = map.values.toList()[i]["latitude"];
+          longitude = map.values.toList()[i]["longitude"];
+          role = map.values.toList()[i]["rol"];
+          if (role == 'conductor') {
+            _markers.add(
+              Marker(
+                markerId: MarkerId('newLocation' + i.toString()),
+                position: LatLng(latitude, longitude),
+                infoWindow: InfoWindow(title: 'location', snippet: 'welcome'),
+                icon: markLocationBus,
+              ),
+            );
+          }
+        }
+      });
+    });
+    // .once()
+    // .then(
+    //   (DataSnapshot snapshot) {
+
+    //   },
+    // );
+  }
 
   Future<void> _updateCamera(lat, lng) async {
     GoogleMapController controller = await _controller.future;
@@ -180,9 +198,6 @@ class _MapsPageState extends State<MapsPage> {
                     'assets/userIcon.png');
               }
               if (element['rol'] == 'conductor') {
-                markLocationBus = (await BitmapDescriptor.fromAssetImage(
-                    ImageConfiguration(devicePixelRatio: 2.5),
-                    'assets/bus.png'));
                 pinLocationIcon = await BitmapDescriptor.fromAssetImage(
                     ImageConfiguration(devicePixelRatio: 2.5),
                     'assets/bus.png');

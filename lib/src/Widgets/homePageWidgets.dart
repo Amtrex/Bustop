@@ -1,10 +1,25 @@
 import 'dart:ui';
 import 'package:bustop/src/Widgets/styleWidgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-class CircleBottoms extends StatelessWidget {
+class CircleBottoms extends StatefulWidget {
+  @override
+  _CircleBottomsState createState() => _CircleBottomsState();
+}
+final FirebaseAuth auth = FirebaseAuth.instance;
+final uid = auth.currentUser.uid;
+
+
+class _CircleBottomsState extends State<CircleBottoms> {
   @override
   Widget build(BuildContext context) {
-    return Table(
+     
+    return bodyPage();
+    
+  }
+  bodyPage(){
+     return Table(
       children: [
         TableRow(children: [
           createCircleBottoms(context,Colors.white, Icons.timer,'Mis Tiempos','timePage'),
@@ -20,7 +35,6 @@ class CircleBottoms extends StatelessWidget {
         ]),
       ],
     );
-    
   }
   Widget createCircleBottoms(BuildContext context, Color color, IconData icon, String data, String route){  
 

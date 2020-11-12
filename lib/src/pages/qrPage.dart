@@ -13,6 +13,7 @@ class _HomePageState extends State<QrPage> {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Color.fromRGBO(251, 85, 23, 1),
         title: Text("CODGIO QR"),
         centerTitle: true,
