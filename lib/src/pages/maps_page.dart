@@ -24,7 +24,10 @@ class _MapsPageState extends State<MapsPage> {
   BitmapDescriptor pinLocationIcon;
   Completer<GoogleMapController> _controller = Completer();
   FirebaseAuth auth = FirebaseAuth.instance;
-  var initial = 0;
+  var locationsDataBase;
+  var markLocationBus;
+
+  var _firebaseRef = FirebaseDatabase().reference().child('location');
 
   void _onMapCreated(GoogleMapController controller) {
     _controller.complete(controller);
@@ -84,9 +87,11 @@ class _MapsPageState extends State<MapsPage> {
     );
   }
 
-  Future<void> _listenMyLocation(rol, userId) async {
+  Future _listenMyLocation(rol, userId) {
+    var initial = 0;
     location.onLocationChanged.listen((LocationData currentLocation) {
       setState(() {
+        _markers.clear();
         if (initial == 0) {
           _updateCamera(currentLocation.latitude, currentLocation.longitude);
           FirebaseDatabase.instance
@@ -100,16 +105,6 @@ class _MapsPageState extends State<MapsPage> {
           });
         }
         origen = LatLng(currentLocation.latitude, currentLocation.longitude);
-        _markers.clear();
-        _markers.add(
-          Marker(
-            markerId: MarkerId('myLocation'),
-            position:
-                LatLng(currentLocation.latitude, currentLocation.longitude),
-            infoWindow: InfoWindow(title: 'location', snippet: 'welcome'),
-            icon: pinLocationIcon,
-          ),
-        );
         FirebaseDatabase.instance
             .reference()
             .child('location')
@@ -119,10 +114,48 @@ class _MapsPageState extends State<MapsPage> {
           'longitude': currentLocation.longitude,
           'rol': rol
         });
+        _markers.add(
+          Marker(
+            markerId: MarkerId('myLocation'),
+            position:
+                LatLng(currentLocation.latitude, currentLocation.longitude),
+            infoWindow: InfoWindow(title: 'location', snippet: 'welcome'),
+            icon: pinLocationIcon,
+          ),
+        );
         initial++;
       });
     });
   }
+
+  // var latitude;
+  // var longitude;
+  // var role;
+  // _firebaseRef.once().then(
+  //   (DataSnapshot snapshot) {
+  //     setState(() {
+  //       Map<dynamic, dynamic> map = snapshot.value;
+  //       for (var i = 0; i < map.length; i++) {
+  //         latitude = map.values.toList()[i]["latitude"];
+  //         longitude = map.values.toList()[i]["longitude"];
+  //         role = map.values.toList()[i]["rol"];
+  //         if (rol == 'usuario' || rol == 'control') {
+  //           if (role == 'conductor') {
+  //             _markers.add(
+  //               Marker(
+  //                 markerId: MarkerId('newLocation' + i.toString()),
+  //                 position: LatLng(latitude, longitude),
+  //                 infoWindow:
+  //                     InfoWindow(title: 'location', snippet: 'welcome'),
+  //                 icon: markLocationBus,
+  //               ),
+  //             );
+  //           }
+  //         }
+  //       }
+  //     });
+  //   },
+  // );
 
   Future<void> _updateCamera(lat, lng) async {
     GoogleMapController controller = await _controller.future;
@@ -134,19 +167,32 @@ class _MapsPageState extends State<MapsPage> {
     try {
       await FirebaseFirestore.instance
           .collection('tblUsuarios')
-          .where("idUsuario == '" + userId + "'")
+          .where("idUsuario == " + userId + "")
           .get()
           .then((value) async {
-        var user = value.docs[0].data();
-        if (user['rol'] == 'usuario' || user['rol'] == 'control') {
-          pinLocationIcon = await BitmapDescriptor.fromAssetImage(
-              ImageConfiguration(devicePixelRatio: 2.5), 'assets/userIcon.png');
-        }
-        if (user['rol'] == 'conductor') {
-          pinLocationIcon = await BitmapDescriptor.fromAssetImage(
-              ImageConfiguration(devicePixelRatio: 2.5), 'assets/bus.png');
-        }
-        _listenMyLocation(user['rol'], userId);
+        var user = value.docs;
+        user.forEach(
+          (element) async {
+            if (element['idUsuario'] == userId) {
+              if (element['rol'] == 'usuario' || element['rol'] == 'control') {
+                pinLocationIcon = await BitmapDescriptor.fromAssetImage(
+                    ImageConfiguration(devicePixelRatio: 2.5),
+                    'assets/userIcon.png');
+              }
+              if (element['rol'] == 'conductor') {
+                markLocationBus = (await BitmapDescriptor.fromAssetImage(
+                    ImageConfiguration(devicePixelRatio: 2.5),
+                    'assets/bus.png'));
+                pinLocationIcon = await BitmapDescriptor.fromAssetImage(
+                    ImageConfiguration(devicePixelRatio: 2.5),
+                    'assets/bus.png');
+              }
+              setState(() {
+                _listenMyLocation(element['rol'], userId);
+              });
+            }
+          },
+        );
       });
     } catch (e) {
       print(e);
