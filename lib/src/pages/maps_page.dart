@@ -26,6 +26,7 @@ class _MapsPageState extends State<MapsPage> {
   FirebaseAuth auth = FirebaseAuth.instance;
   var locationsDataBase;
   var markLocationBus;
+  var markLocationControl;
 
   var _firebaseRef = FirebaseDatabase().reference().child('location');
 
@@ -37,7 +38,6 @@ class _MapsPageState extends State<MapsPage> {
     // Future.delayed(Duration.zero, () {
     //   getData(auth.currentUser.uid);
     // });
-    positionsUsers();
     super.initState();
   }
 
@@ -125,23 +125,27 @@ class _MapsPageState extends State<MapsPage> {
             icon: pinLocationIcon,
           ),
         );
-        FirebaseDatabase.instance
-            .reference()
-            .child('location')
-            .child(userId)
-            .update({
-          'latitude': currentLocation.latitude,
-          'longitude': currentLocation.longitude,
-          'rol': rol
-        });
+        if (rol != 'usuario') {
+          FirebaseDatabase.instance
+              .reference()
+              .child('location')
+              .child(userId)
+              .update({
+            'latitude': currentLocation.latitude,
+            'longitude': currentLocation.longitude,
+            'rol': rol
+          });
+        }
         initial++;
       });
     });
   }
 
-  positionsUsers() async {
+  positionsUsers(userRolLoged) async {
     markLocationBus = (await BitmapDescriptor.fromAssetImage(
         ImageConfiguration(devicePixelRatio: 2.5), 'assets/bus.png'));
+    markLocationControl = (await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 2.5), 'assets/control.png'));
     _firebaseRef.onValue.listen((event) {
       // _markers.clear();
       var latitude;
@@ -154,25 +158,35 @@ class _MapsPageState extends State<MapsPage> {
           latitude = map.values.toList()[i]["latitude"];
           longitude = map.values.toList()[i]["longitude"];
           role = map.values.toList()[i]["rol"];
-          if (role == 'conductor') {
-            _markers.add(
-              Marker(
-                markerId: MarkerId('newLocation' + i.toString()),
-                position: LatLng(latitude, longitude),
-                infoWindow: InfoWindow(title: 'location', snippet: 'welcome'),
-                icon: markLocationBus,
-              ),
-            );
+          if (userRolLoged != 'conductor') {
+            if (role == 'conductor') {
+              _markers.add(
+                Marker(
+                  markerId: MarkerId('newLocation' + i.toString()),
+                  position: LatLng(latitude, longitude),
+                  infoWindow:
+                      InfoWindow(title: role, snippet: 'aca va la ruta'),
+                  icon: markLocationBus,
+                ),
+              );
+            }
+          }
+          if (userRolLoged == 'conductor') {
+            if (role == 'control') {
+              _markers.add(
+                Marker(
+                  markerId: MarkerId('newLocation' + i.toString()),
+                  position: LatLng(latitude, longitude),
+                  infoWindow:
+                      InfoWindow(title: 'control', snippet: 'Toma de tiempo'),
+                  icon: markLocationControl,
+                ),
+              );
+            }
           }
         }
       });
     });
-    // .once()
-    // .then(
-    //   (DataSnapshot snapshot) {
-
-    //   },
-    // );
   }
 
   Future<void> _updateCamera(lat, lng) async {
@@ -192,10 +206,15 @@ class _MapsPageState extends State<MapsPage> {
         user.forEach(
           (element) async {
             if (element['idUsuario'] == userId) {
-              if (element['rol'] == 'usuario' || element['rol'] == 'control') {
+              if (element['rol'] == 'usuario') {
                 pinLocationIcon = await BitmapDescriptor.fromAssetImage(
                     ImageConfiguration(devicePixelRatio: 2.5),
                     'assets/userIcon.png');
+              }
+              if (element['rol'] == 'control') {
+                pinLocationIcon = await BitmapDescriptor.fromAssetImage(
+                    ImageConfiguration(devicePixelRatio: 2.5),
+                    'assets/control.png');
               }
               if (element['rol'] == 'conductor') {
                 pinLocationIcon = await BitmapDescriptor.fromAssetImage(
@@ -203,6 +222,7 @@ class _MapsPageState extends State<MapsPage> {
                     'assets/bus.png');
               }
               setState(() {
+                positionsUsers(element['rol']);
                 _listenMyLocation(element['rol'], userId);
               });
             }
