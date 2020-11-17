@@ -214,8 +214,7 @@ class _LoginPageState extends State<LoginPage> {
           .signInWithEmailAndPassword(
         email: email,
         password: pass,
-      )
-          .then((value) {
+      ).then((value) {
         get_data(value.user.uid);
       }).catchError((e) {
         if (e.code == 'user-not-found') {

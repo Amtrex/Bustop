@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:bustop/src/Widgets/buttons_widgets.dart';
 import 'package:bustop/src/Widgets/homePageWidgets.dart';
 import 'package:bustop/src/Widgets/styleWidgets.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,10 @@ class _HomePageState extends State<HomePage> {
           ListView(
             children: [TittlesBack(), bodyPage(widget.rol)],
           ),
+          Positioned(
+            left: -50.0,
+            child: ProfileButtonWidget(),
+          )
         ],
       ),
     );
@@ -166,4 +171,8 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  
 }
+
+
