@@ -295,7 +295,6 @@ var _select;
                             indentificationNumberController.text;
                         _movilNumber = int.parse(movilNumberController.text);
                         _email = emailController.text;
-                        _companyCode = int.parse(companyCodeController.text);
                         createUserWithEmailAndPassword();
                         return showDialog(
                           context: context,
@@ -364,8 +363,6 @@ var _select;
       'document_number': indentificationNumberController.text,
       'movil': movilNumberController.text,
       'email': emailController.text,
-      'rol': _rolS['nombre'],
-      'state': 1
     }).then((value) {
       Navigator.of(context).pop();
       return showDialog(
