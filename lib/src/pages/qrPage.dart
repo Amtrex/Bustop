@@ -1,3 +1,4 @@
+import 'package:bustop/src/Widgets/buttons_widgets.dart';
 import 'package:bustop/src/pages/generate.dart';
 import 'package:bustop/src/pages/scan.dart';
 import 'package:flutter/material.dart';
@@ -18,32 +19,41 @@ class _HomePageState extends State<QrPage> {
         title: Text("CODGIO QR"),
         centerTitle: true,
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: FractionalOffset(0.0, 0.6),
-              end: FractionalOffset(0.0, 1.0),
-              colors: [Colors.white, Color.fromRGBO(200, 200, 200, 1)]),
-        ),
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Image(
-              image: AssetImage('assets/Qricon.png'),
-              height: 300,
-              width: 120,
+
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: FractionalOffset(0.0, 0.6),
+                  end: FractionalOffset(0.0, 1.0),
+                  colors: [Colors.white, Color.fromRGBO(200, 200, 200, 1)]),
             ),
-            flatButton("Scanear codigo QR", ScanPage()),
-            SizedBox(
-              height: 20.0,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Image(
+                  image: AssetImage('assets/Qricon.png'),
+                  height: 300,
+                  width: 120,
+                ),
+                flatButton("Scanear codigo QR", ScanPage()),
+                SizedBox(
+                  height: 20.0,
+                ),
+                flatButton("Crear codigo QR", GeneratePage()),
+              ],
             ),
-            flatButton("Crear codigo QR", GeneratePage()),
-          ],
-        ),
+          ),
+          Positioned(
+            left: -50.0,
+            child: ProfileButtonWidget(),
+          ),
+        ],
       ),
     );
   }

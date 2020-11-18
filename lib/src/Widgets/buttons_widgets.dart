@@ -1,5 +1,7 @@
+import 'package:bustop/src/pages/scroll_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 class ProfileButtonWidget extends StatefulWidget {
@@ -10,12 +12,12 @@ class ProfileButtonWidget extends StatefulWidget {
   _ProfileButtonWidgetState createState() => _ProfileButtonWidgetState();
 }
 
-final FirebaseAuth auth = FirebaseAuth.instance;
-var uid;
-var email;
- var user;
 class _ProfileButtonWidgetState extends State<ProfileButtonWidget> {
- 
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  var uid;
+  var email;
+  var user;
+
   Future getUser() async {
     await FirebaseFirestore.instance
         .collection('tblUsuarios')
@@ -29,12 +31,22 @@ class _ProfileButtonWidgetState extends State<ProfileButtonWidget> {
       });
     });
   }
-@override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getUser();
+
+  deleteLocation(context) {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    FirebaseDatabase.instance
+        .reference()
+        .child('location')
+        .child(auth.currentUser.uid)
+        .remove()
+        .then(
+      (value) {
+        Navigator.of(context).pop();
+        // SystemNavigator.pop();
+      },
+    );
   }
+
   @override
   Widget build(BuildContext context) {
     if (uid == null || uid == '') {
@@ -93,8 +105,10 @@ class _ProfileButtonWidgetState extends State<ProfileButtonWidget> {
                   children: [
                     Text(
                       user[0],
-                      style:
-                          TextStyle(fontSize: 80, fontWeight: FontWeight.bold, color: Colors.white),
+                      style: TextStyle(
+                          fontSize: 80,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
                     ),
                   ],
                 ),
@@ -106,7 +120,10 @@ class _ProfileButtonWidgetState extends State<ProfileButtonWidget> {
               ),
               Text(
                 email,
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.grey),
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey),
               ),
             ],
           )),
@@ -135,7 +152,13 @@ class _ProfileButtonWidgetState extends State<ProfileButtonWidget> {
                 style: TextStyle(color: Color.fromRGBO(251, 83, 13, 1)),
               ),
               onPressed: () {
-                Navigator.of(context).pop();
+
+                deleteLocation(context);
+                Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => ScrollPage()),
+                                          ModalRoute.withName("/"));
               },
             ),
           ],

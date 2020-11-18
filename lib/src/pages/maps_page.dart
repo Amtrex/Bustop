@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bustop/src/Widgets/buttons_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -61,10 +62,15 @@ class _MapsPageState extends State<MapsPage> {
       ),
       body: Stack(
         children: [
+          
           GoogleMap(
             markers: _markers,
             onMapCreated: _onMapCreated,
             initialCameraPosition: _initialPosition,
+          ),
+          Positioned(
+            left: -50.0,
+            child: ProfileButtonWidget(),
           ),
         ],
       ),

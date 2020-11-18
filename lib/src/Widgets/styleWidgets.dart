@@ -103,15 +103,17 @@ class Tittles extends StatelessWidget {
 class AppBarTittle extends StatelessWidget {
   const AppBarTittle({
     Key key,
-    @required this.title,
+    @required this.title, this.elev,
   }) : super(key: key);
 
   final String title;
+  final double elev;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
      appBar: AppBar(
+       elevation: elev,
        title: Text(title),
        backgroundColor: Color.fromRGBO(251, 85, 23, 1),
      ),
