@@ -13,9 +13,9 @@ class ProfileButtonWidget extends StatefulWidget {
 final FirebaseAuth auth = FirebaseAuth.instance;
 var uid;
 var email;
-
+ var user;
 class _ProfileButtonWidgetState extends State<ProfileButtonWidget> {
-  var user;
+ 
   Future getUser() async {
     await FirebaseFirestore.instance
         .collection('tblUsuarios')
@@ -29,7 +29,12 @@ class _ProfileButtonWidgetState extends State<ProfileButtonWidget> {
       });
     });
   }
-
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUser();
+  }
   @override
   Widget build(BuildContext context) {
     if (uid == null || uid == '') {
@@ -38,7 +43,10 @@ class _ProfileButtonWidgetState extends State<ProfileButtonWidget> {
       Future.delayed(
         Duration.zero,
         () {
-          getUser();
+          setState(() {
+            getUser();
+          });
+          
         },
       );
     }
