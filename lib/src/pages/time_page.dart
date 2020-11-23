@@ -11,8 +11,37 @@ class TimePage extends StatefulWidget {
 class _TimePageState extends State<TimePage> {
   @override
   Widget build(BuildContext context) {
-    return AppBarTittle(
-      title: 'Mis tiempos',
+    return Container(
+
+      child: Stack(
+        children: [
+          AppBarTittle(
+            title: 'Mis tiempos',
+          ),
+
+          Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.deepOrange,
+              title: Text('mis tiempos'),
+            ),
+
+            body: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Center(
+                child: Column(             
+                  children:<Widget>[
+                    
+                    for (var i = 0; i < count; i++) {
+                      
+                    }
+                  ]
+                ),
+              ),
+            )
+                  
+          )
+        ],
+      ),
     );
   }
 }
