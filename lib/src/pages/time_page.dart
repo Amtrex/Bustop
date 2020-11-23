@@ -31,9 +31,6 @@ class _TimePageState extends State<TimePage> {
                 child: Column(             
                   children:<Widget>[
                     
-                    for (var i = 0; i < count; i++) {
-                      
-                    }
                   ]
                 ),
               ),
