@@ -208,32 +208,7 @@ var _select;
                     }
                   },
                 ),
-                Row(
-                  //Rol
-                  children: <Widget>[
-                    Icon(Icons.recent_actors),
-                    SizedBox(
-                      width: 15.0,
-                    ),
-                    Expanded(
-                      child: DropdownButton(
-                        hint: Text('Rol'),
-                        value: _rolS,
-                        items: _roles
-                            .map((e) => DropdownMenuItem(
-                                  value: e,
-                                  child: Text(e['nombre']),
-                                ))
-                            .toList(),
-                        onChanged: (opt) {
-                          setState(() {
-                            _rolS = opt;
-                          });
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+               
                 TextFormField(
                   //Password
                   obscureText: _showPass,
@@ -365,8 +340,8 @@ var _select;
         'correoUsuario': _email,
         'idUsuario' : user,
         'nomUsuario': _name,
-        'rol': 'Usuario',
-        'tipoUsuario': 'Usuario'
+        'rol': 'usuario',
+        'tipoUsuario': 'usuario'
         },)
     .then((value) {
       Navigator.of(context).pop();
