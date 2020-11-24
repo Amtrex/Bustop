@@ -295,6 +295,7 @@ var _select;
                             indentificationNumberController.text;
                         _movilNumber = int.parse(movilNumberController.text);
                         _email = emailController.text;
+                         });
                         createUserWithEmailAndPassword();
                         return showDialog(
                           context: context,
@@ -302,7 +303,7 @@ var _select;
                             return Center(child: CircularProgressIndicator());
                           },
                         );
-                      });
+                     
                     } else {
                       AlertDialog(title: Text('.l.'));
                     }
@@ -320,50 +321,54 @@ var _select;
   }
 
   Future createUserWithEmailAndPassword() async {
-    try {
       UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(
         email: _email,
         password: passwordController.text,
       ).then((user){
-        addUser(user);
+        addUser(user.user.uid);
       })
           .catchError(
-        (e) {
-          Navigator.of(context).pop();
+        (e) { if (e.code == 'invalid-email') {
           return showDialog(
             context: context,
             builder: (context) => AlertDialogWidget(
-                tittle: 'Error!',
-                desc: 'El correo electronico se encuentra registrado.'),
+                tittle: 'Correo incorrecto',
+                desc:
+                    'El correo que digitaste es erroneo, intenta digitarlo nuevamente.'),
           );
+        } else if (e.code == 'email-already-in-use') {
+          return showDialog(
+            context: context,
+            builder: (context) => AlertDialogWidget(
+                tittle: 'Correo en uso',
+                desc:
+                    'El correo que digitaste ya esta registrado en nuestra base de datos, intenta digitar otro correo.'),
+          );
+        }else {
+          print(e.message);
+          return e.message;
+        }
+       
         },
       );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
-    } catch (e) {
-      print(e);
     }
-  }
+  
 
-  Future<dynamic> addUser(userId) async {
-    // Call the user's CollectionReference to add a new user
-    return users.add({
-      'user_id': userId,
-      'name': _name != '' || _name != null ? _name : '',
-      'lastname':
-          lastnameController.text != '' || lastnameController.text != null
-              ? _lastName
-              : '', // Stokes and Sons
-      'document_type': _select['nombre'], // 42
-      'document_number': indentificationNumberController.text,
-      'movil': movilNumberController.text,
-      'email': emailController.text,
-    }).then((value) {
+  addUser(user) async{
+      await FirebaseFirestore.instance
+        .collection('tblUsuarios')
+        .doc(user)
+        .set(
+    {
+        'ccUsuario': _indentificationNumber,
+        'correoUsuario': _email,
+        'idUsuario' : user,
+        'nomUsuario': _name,
+        'rol': 'Usuario',
+        'tipoUsuario': 'Usuario'
+        },)
+    .then((value) {
       Navigator.of(context).pop();
       return showDialog(
         context: context,
