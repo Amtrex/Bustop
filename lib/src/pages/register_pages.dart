@@ -1,5 +1,6 @@
-import 'dart:math';
-
+import 'dart:ui';
+import 'package:bustop/src/Widgets/styleWidgets.dart';
+import 'package:bustop/src/pages/scroll_page.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -17,10 +18,10 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          backApp(),
+          BackApp(),
           registerPage(),
           Center(
-            child: tittles(),
+            child: Tittles(),
           ),
         ],
       ),
@@ -29,12 +30,13 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget registerPage() {
     return Container(
+      padding: EdgeInsets.only(top: 260),
       child: Center(
         child: ListView(
           //  mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 240,
+              height: 50,
             ),
             Container(
               width: 320.0,
@@ -60,7 +62,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 padding:
                     EdgeInsets.symmetric(horizontal: 100.0, vertical: 15.0),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, 'regs');
+              },
             ),
             SizedBox(
               height: myHeight,
@@ -116,108 +120,39 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               onPressed: () {},
             ),
-           
             Container(
-              height: 70,
+              height: 30,
             ),
-            RaisedButton(
-              elevation: 8.0,
-              shape: StadiumBorder(),
-              color: Color(0xffdc4d1e),
-              child: Padding(
-                child: Text(
-                  'CONTINUAR',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Color(0xffffffff),
-                  ),
+            Divider(color: Colors.transparent),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("¿Ya tienes una cuenta?",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12.0,
+                    )),
+                GestureDetector(
+                  child: Text("¡Ingresa!",
+                      style: TextStyle(
+                        color: Color(0xffea5724),
+                        fontSize: 12.0,
+                      )),
+                  onTap: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => ScrollPage()),
+                        ModalRoute.withName("/"));
+                  },
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 90.0, vertical: 15.0),
-              ),
-              onPressed: () {},
+              ],
             ),
-
-            Center(
-                child: GestureDetector(
-                    child: Text("¿Ya tienes una cuenta?¡Ingresa!",
-                        style: TextStyle(
-                          color: Color(0xffea5724),
-                          fontSize: 12.0,
-                        )),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/');
-                    })),
+            SizedBox(
+              height: 200,
+            ),
           ],
         ),
       ),
     );
-  }
-
-  Widget backApp() {
-    SingleChildScrollView(
-      child: Column(
-        children: <Widget>[],
-      ),
-    );
-    final gradiente = Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            begin: FractionalOffset(0.0, 0.6),
-            end: FractionalOffset(0.0, 1.0),
-            colors: [Colors.white, Color.fromRGBO(200, 200, 200, 1)]),
-      ),
-    );
-
-    final orangeBox = Transform.rotate(
-      angle: -pi / 1.0,
-      child: Container(
-        height: 360.0,
-        width: 360.0,
-        decoration: BoxDecoration(
-            color: Color.fromRGBO(251, 85, 23, 1),
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(120.0),
-                topLeft: Radius.circular(20.0))),
-      ),
-    );
-
-    return Stack(
-      children: <Widget>[gradiente, Positioned(top: -100.0, child: orangeBox)],
-    );
-  }
-
-  Widget tittles() {
-    return Container(
-        padding: EdgeInsets.all(60.0),
-        child: Column(
-          children: <Widget>[image(), desc()],
-        ));
-  }
-
-  Widget image() {
-    return Image(
-      image: AssetImage('assets/logoW.png'),
-      height: 120,
-      width: 120,
-    );
-  }
-
-  Widget desc() {
-    return Container(
-        padding: EdgeInsets.all(40.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              "Registrate",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold),
-            )
-          ],
-        ));
   }
 }
